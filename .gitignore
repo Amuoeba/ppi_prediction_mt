@@ -1,0 +1,16 @@
+# Common settings and caches
+.vscode
+*.DS_Store
+__pycache__*
+*._*.db
+
+# large files
+notebooks
+data/data/*
+data/caches/*
+loggs
+temp_and_demos/*.pdb
+
+
+# Artefacts
+.gitignore_old

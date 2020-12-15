@@ -1,0 +1,2891 @@
+Running mol_readers/pdb_transforms.py
+Script dir: /home/erikj/projects/insidrug/py_proj/erikj/mol_readers
+Working dir:/home/erikj/projects/insidrug/py_proj/erikj
+__________________________________________________   MODELS   __________________________________________________
+<Model id=0>
+Len: 1
+__________________________________________________   CHAINS   __________________________________________________
+<Chain id=E>
+<Chain id=I>
+Len: 2
+__________________________________________________   RESIDUES   __________________________________________________
+<Residue CYS het=  resseq=1 icode= >
+<Residue GLY het=  resseq=2 icode= >
+<Residue VAL het=  resseq=3 icode= >
+<Residue PRO het=  resseq=4 icode= >
+<Residue ALA het=  resseq=5 icode= >
+<Residue ILE het=  resseq=6 icode= >
+<Residue GLN het=  resseq=7 icode= >
+<Residue PRO het=  resseq=8 icode= >
+<Residue VAL het=  resseq=9 icode= >
+<Residue LEU het=  resseq=10 icode= >
+<Residue SER het=  resseq=11 icode= >
+<Residue GLY het=  resseq=12 icode= >
+<Residue LEU het=  resseq=13 icode= >
+<Residue ILE het=  resseq=16 icode= >
+<Residue VAL het=  resseq=17 icode= >
+<Residue ASN het=  resseq=18 icode= >
+<Residue GLY het=  resseq=19 icode= >
+<Residue GLU het=  resseq=20 icode= >
+<Residue GLU het=  resseq=21 icode= >
+<Residue ALA het=  resseq=22 icode= >
+<Residue VAL het=  resseq=23 icode= >
+<Residue PRO het=  resseq=24 icode= >
+<Residue GLY het=  resseq=25 icode= >
+<Residue SER het=  resseq=26 icode= >
+<Residue TRP het=  resseq=27 icode= >
+<Residue PRO het=  resseq=28 icode= >
+<Residue TRP het=  resseq=29 icode= >
+<Residue GLN het=  resseq=30 icode= >
+<Residue VAL het=  resseq=31 icode= >
+<Residue SER het=  resseq=32 icode= >
+<Residue LEU het=  resseq=33 icode= >
+<Residue GLN het=  resseq=34 icode= >
+<Residue ASP het=  resseq=35 icode= >
+<Residue LYS het=  resseq=36 icode= >
+<Residue THR het=  resseq=37 icode= >
+<Residue GLY het=  resseq=38 icode= >
+<Residue PHE het=  resseq=39 icode= >
+<Residue HIS het=  resseq=40 icode= >
+<Residue PHE het=  resseq=41 icode= >
+<Residue CYS het=  resseq=42 icode= >
+<Residue GLY het=  resseq=43 icode= >
+<Residue GLY het=  resseq=44 icode= >
+<Residue SER het=  resseq=45 icode= >
+<Residue LEU het=  resseq=46 icode= >
+<Residue ILE het=  resseq=47 icode= >
+<Residue ASN het=  resseq=48 icode= >
+<Residue GLU het=  resseq=49 icode= >
+<Residue ASN het=  resseq=50 icode= >
+<Residue TRP het=  resseq=51 icode= >
+<Residue VAL het=  resseq=52 icode= >
+<Residue VAL het=  resseq=53 icode= >
+<Residue THR het=  resseq=54 icode= >
+<Residue ALA het=  resseq=55 icode= >
+<Residue ALA het=  resseq=56 icode= >
+<Residue HIS het=  resseq=57 icode= >
+<Residue CYS het=  resseq=58 icode= >
+<Residue GLY het=  resseq=59 icode= >
+<Residue VAL het=  resseq=60 icode= >
+<Residue THR het=  resseq=61 icode= >
+<Residue THR het=  resseq=62 icode= >
+<Residue SER het=  resseq=63 icode= >
+<Residue ASP het=  resseq=64 icode= >
+<Residue VAL het=  resseq=65 icode= >
+<Residue VAL het=  resseq=66 icode= >
+<Residue VAL het=  resseq=67 icode= >
+<Residue ALA het=  resseq=68 icode= >
+<Residue GLY het=  resseq=69 icode= >
+<Residue GLU het=  resseq=70 icode= >
+<Residue PHE het=  resseq=71 icode= >
+<Residue ASP het=  resseq=72 icode= >
+<Residue GLN het=  resseq=73 icode= >
+<Residue GLY het=  resseq=74 icode= >
+<Residue SER het=  resseq=75 icode= >
+<Residue SER het=  resseq=76 icode= >
+<Residue SER het=  resseq=77 icode= >
+<Residue GLU het=  resseq=78 icode= >
+<Residue LYS het=  resseq=79 icode= >
+<Residue ILE het=  resseq=80 icode= >
+<Residue GLN het=  resseq=81 icode= >
+<Residue LYS het=  resseq=82 icode= >
+<Residue LEU het=  resseq=83 icode= >
+<Residue LYS het=  resseq=84 icode= >
+<Residue ILE het=  resseq=85 icode= >
+<Residue ALA het=  resseq=86 icode= >
+<Residue LYS het=  resseq=87 icode= >
+<Residue VAL het=  resseq=88 icode= >
+<Residue PHE het=  resseq=89 icode= >
+<Residue LYS het=  resseq=90 icode= >
+<Residue ASN het=  resseq=91 icode= >
+<Residue SER het=  resseq=92 icode= >
+<Residue LYS het=  resseq=93 icode= >
+<Residue TYR het=  resseq=94 icode= >
+<Residue ASN het=  resseq=95 icode= >
+<Residue SER het=  resseq=96 icode= >
+<Residue LEU het=  resseq=97 icode= >
+<Residue THR het=  resseq=98 icode= >
+<Residue ILE het=  resseq=99 icode= >
+<Residue ASN het=  resseq=100 icode= >
+<Residue ASN het=  resseq=101 icode= >
+<Residue ASP het=  resseq=102 icode= >
+<Residue ILE het=  resseq=103 icode= >
+<Residue THR het=  resseq=104 icode= >
+<Residue LEU het=  resseq=105 icode= >
+<Residue LEU het=  resseq=106 icode= >
+<Residue LYS het=  resseq=107 icode= >
+<Residue LEU het=  resseq=108 icode= >
+<Residue SER het=  resseq=109 icode= >
+<Residue THR het=  resseq=110 icode= >
+<Residue ALA het=  resseq=111 icode= >
+<Residue ALA het=  resseq=112 icode= >
+<Residue SER het=  resseq=113 icode= >
+<Residue PHE het=  resseq=114 icode= >
+<Residue SER het=  resseq=115 icode= >
+<Residue GLN het=  resseq=116 icode= >
+<Residue THR het=  resseq=117 icode= >
+<Residue VAL het=  resseq=118 icode= >
+<Residue SER het=  resseq=119 icode= >
+<Residue ALA het=  resseq=120 icode= >
+<Residue VAL het=  resseq=121 icode= >
+<Residue CYS het=  resseq=122 icode= >
+<Residue LEU het=  resseq=123 icode= >
+<Residue PRO het=  resseq=124 icode= >
+<Residue SER het=  resseq=125 icode= >
+<Residue ALA het=  resseq=126 icode= >
+<Residue SER het=  resseq=127 icode= >
+<Residue ASP het=  resseq=128 icode= >
+<Residue ASP het=  resseq=129 icode= >
+<Residue PHE het=  resseq=130 icode= >
+<Residue ALA het=  resseq=131 icode= >
+<Residue ALA het=  resseq=132 icode= >
+<Residue GLY het=  resseq=133 icode= >
+<Residue THR het=  resseq=134 icode= >
+<Residue THR het=  resseq=135 icode= >
+<Residue CYS het=  resseq=136 icode= >
+<Residue VAL het=  resseq=137 icode= >
+<Residue THR het=  resseq=138 icode= >
+<Residue THR het=  resseq=139 icode= >
+<Residue GLY het=  resseq=140 icode= >
+<Residue TRP het=  resseq=141 icode= >
+<Residue GLY het=  resseq=142 icode= >
+<Residue LEU het=  resseq=143 icode= >
+<Residue THR het=  resseq=144 icode= >
+<Residue ARG het=  resseq=145 icode= >
+<Residue TYR het=  resseq=146 icode= >
+<Residue ALA het=  resseq=149 icode= >
+<Residue ASN het=  resseq=150 icode= >
+<Residue THR het=  resseq=151 icode= >
+<Residue PRO het=  resseq=152 icode= >
+<Residue ASP het=  resseq=153 icode= >
+<Residue ARG het=  resseq=154 icode= >
+<Residue LEU het=  resseq=155 icode= >
+<Residue GLN het=  resseq=156 icode= >
+<Residue GLN het=  resseq=157 icode= >
+<Residue ALA het=  resseq=158 icode= >
+<Residue SER het=  resseq=159 icode= >
+<Residue LEU het=  resseq=160 icode= >
+<Residue PRO het=  resseq=161 icode= >
+<Residue LEU het=  resseq=162 icode= >
+<Residue LEU het=  resseq=163 icode= >
+<Residue SER het=  resseq=164 icode= >
+<Residue ASN het=  resseq=165 icode= >
+<Residue THR het=  resseq=166 icode= >
+<Residue ASN het=  resseq=167 icode= >
+<Residue CYS het=  resseq=168 icode= >
+<Residue LYS het=  resseq=169 icode= >
+<Residue LYS het=  resseq=170 icode= >
+<Residue TYR het=  resseq=171 icode= >
+<Residue TRP het=  resseq=172 icode= >
+<Residue GLY het=  resseq=173 icode= >
+<Residue THR het=  resseq=174 icode= >
+<Residue LYS het=  resseq=175 icode= >
+<Residue ILE het=  resseq=176 icode= >
+<Residue LYS het=  resseq=177 icode= >
+<Residue ASP het=  resseq=178 icode= >
+<Residue ALA het=  resseq=179 icode= >
+<Residue MET het=  resseq=180 icode= >
+<Residue ILE het=  resseq=181 icode= >
+<Residue CYS het=  resseq=182 icode= >
+<Residue ALA het=  resseq=183 icode= >
+<Residue GLY het=  resseq=184 icode= >
+<Residue ALA het=  resseq=185 icode= >
+<Residue SER het=  resseq=186 icode= >
+<Residue GLY het=  resseq=187 icode= >
+<Residue VAL het=  resseq=188 icode= >
+<Residue SER het=  resseq=189 icode= >
+<Residue SER het=  resseq=190 icode= >
+<Residue CYS het=  resseq=191 icode= >
+<Residue MET het=  resseq=192 icode= >
+<Residue GLY het=  resseq=193 icode= >
+<Residue ASP het=  resseq=194 icode= >
+<Residue SER het=  resseq=195 icode= >
+<Residue GLY het=  resseq=196 icode= >
+<Residue GLY het=  resseq=197 icode= >
+<Residue PRO het=  resseq=198 icode= >
+<Residue LEU het=  resseq=199 icode= >
+<Residue VAL het=  resseq=200 icode= >
+<Residue CYS het=  resseq=201 icode= >
+<Residue LYS het=  resseq=202 icode= >
+<Residue LYS het=  resseq=203 icode= >
+<Residue ASN het=  resseq=204 icode= >
+<Residue GLY het=  resseq=205 icode= >
+<Residue ALA het=  resseq=206 icode= >
+<Residue TRP het=  resseq=207 icode= >
+<Residue THR het=  resseq=208 icode= >
+<Residue LEU het=  resseq=209 icode= >
+<Residue VAL het=  resseq=210 icode= >
+<Residue GLY het=  resseq=211 icode= >
+<Residue ILE het=  resseq=212 icode= >
+<Residue VAL het=  resseq=213 icode= >
+<Residue SER het=  resseq=214 icode= >
+<Residue TRP het=  resseq=215 icode= >
+<Residue GLY het=  resseq=216 icode= >
+<Residue SER het=  resseq=217 icode= >
+<Residue SER het=  resseq=218 icode= >
+<Residue THR het=  resseq=219 icode= >
+<Residue CYS het=  resseq=220 icode= >
+<Residue SER het=  resseq=221 icode= >
+<Residue THR het=  resseq=222 icode= >
+<Residue SER het=  resseq=223 icode= >
+<Residue THR het=  resseq=224 icode= >
+<Residue PRO het=  resseq=225 icode= >
+<Residue GLY het=  resseq=226 icode= >
+<Residue VAL het=  resseq=227 icode= >
+<Residue TYR het=  resseq=228 icode= >
+<Residue ALA het=  resseq=229 icode= >
+<Residue ARG het=  resseq=230 icode= >
+<Residue VAL het=  resseq=231 icode= >
+<Residue THR het=  resseq=232 icode= >
+<Residue ALA het=  resseq=233 icode= >
+<Residue LEU het=  resseq=234 icode= >
+<Residue VAL het=  resseq=235 icode= >
+<Residue ASN het=  resseq=236 icode= >
+<Residue TRP het=  resseq=237 icode= >
+<Residue VAL het=  resseq=238 icode= >
+<Residue GLN het=  resseq=239 icode= >
+<Residue GLN het=  resseq=240 icode= >
+<Residue THR het=  resseq=241 icode= >
+<Residue LEU het=  resseq=242 icode= >
+<Residue ALA het=  resseq=243 icode= >
+<Residue ALA het=  resseq=244 icode= >
+<Residue ASN het=  resseq=245 icode= >
+<Residue HOH het=W resseq=406 icode= >
+<Residue HOH het=W resseq=407 icode= >
+<Residue HOH het=W resseq=408 icode= >
+<Residue HOH het=W resseq=409 icode= >
+<Residue HOH het=W resseq=410 icode= >
+<Residue HOH het=W resseq=411 icode= >
+<Residue HOH het=W resseq=412 icode= >
+<Residue HOH het=W resseq=413 icode= >
+<Residue HOH het=W resseq=414 icode= >
+<Residue HOH het=W resseq=415 icode= >
+<Residue HOH het=W resseq=416 icode= >
+<Residue HOH het=W resseq=417 icode= >
+<Residue HOH het=W resseq=418 icode= >
+<Residue HOH het=W resseq=419 icode= >
+<Residue HOH het=W resseq=420 icode= >
+<Residue HOH het=W resseq=421 icode= >
+<Residue HOH het=W resseq=423 icode= >
+<Residue HOH het=W resseq=424 icode= >
+<Residue HOH het=W resseq=425 icode= >
+<Residue HOH het=W resseq=427 icode= >
+<Residue HOH het=W resseq=428 icode= >
+<Residue HOH het=W resseq=429 icode= >
+<Residue HOH het=W resseq=430 icode= >
+<Residue HOH het=W resseq=431 icode= >
+<Residue HOH het=W resseq=432 icode= >
+<Residue HOH het=W resseq=433 icode= >
+<Residue HOH het=W resseq=434 icode= >
+<Residue HOH het=W resseq=435 icode= >
+<Residue HOH het=W resseq=436 icode= >
+<Residue HOH het=W resseq=437 icode= >
+<Residue HOH het=W resseq=438 icode= >
+<Residue HOH het=W resseq=439 icode= >
+<Residue HOH het=W resseq=440 icode= >
+<Residue HOH het=W resseq=441 icode= >
+<Residue HOH het=W resseq=442 icode= >
+<Residue HOH het=W resseq=443 icode= >
+<Residue HOH het=W resseq=444 icode= >
+<Residue HOH het=W resseq=445 icode= >
+<Residue HOH het=W resseq=446 icode= >
+<Residue HOH het=W resseq=448 icode= >
+<Residue HOH het=W resseq=449 icode= >
+<Residue HOH het=W resseq=450 icode= >
+<Residue HOH het=W resseq=451 icode= >
+<Residue HOH het=W resseq=452 icode= >
+<Residue HOH het=W resseq=453 icode= >
+<Residue HOH het=W resseq=454 icode= >
+<Residue HOH het=W resseq=455 icode= >
+<Residue HOH het=W resseq=456 icode= >
+<Residue HOH het=W resseq=457 icode= >
+<Residue HOH het=W resseq=458 icode= >
+<Residue HOH het=W resseq=459 icode= >
+<Residue HOH het=W resseq=463 icode= >
+<Residue HOH het=W resseq=469 icode= >
+<Residue HOH het=W resseq=501 icode= >
+<Residue HOH het=W resseq=502 icode= >
+<Residue HOH het=W resseq=503 icode= >
+<Residue HOH het=W resseq=504 icode= >
+<Residue HOH het=W resseq=516 icode= >
+<Residue HOH het=W resseq=517 icode= >
+<Residue HOH het=W resseq=518 icode= >
+<Residue HOH het=W resseq=523 icode= >
+<Residue HOH het=W resseq=524 icode= >
+<Residue HOH het=W resseq=525 icode= >
+<Residue HOH het=W resseq=527 icode= >
+<Residue HOH het=W resseq=528 icode= >
+<Residue HOH het=W resseq=532 icode= >
+<Residue HOH het=W resseq=535 icode= >
+<Residue HOH het=W resseq=538 icode= >
+<Residue HOH het=W resseq=601 icode= >
+<Residue HOH het=W resseq=603 icode= >
+<Residue HOH het=W resseq=604 icode= >
+<Residue HOH het=W resseq=606 icode= >
+<Residue HOH het=W resseq=607 icode= >
+<Residue HOH het=W resseq=608 icode= >
+<Residue HOH het=W resseq=611 icode= >
+<Residue HOH het=W resseq=612 icode= >
+<Residue HOH het=W resseq=613 icode= >
+<Residue HOH het=W resseq=614 icode= >
+<Residue HOH het=W resseq=615 icode= >
+<Residue HOH het=W resseq=616 icode= >
+<Residue HOH het=W resseq=617 icode= >
+<Residue HOH het=W resseq=618 icode= >
+<Residue HOH het=W resseq=619 icode= >
+<Residue HOH het=W resseq=620 icode= >
+<Residue HOH het=W resseq=621 icode= >
+<Residue HOH het=W resseq=622 icode= >
+<Residue HOH het=W resseq=624 icode= >
+<Residue HOH het=W resseq=625 icode= >
+<Residue HOH het=W resseq=626 icode= >
+<Residue HOH het=W resseq=627 icode= >
+<Residue HOH het=W resseq=628 icode= >
+<Residue HOH het=W resseq=701 icode= >
+<Residue HOH het=W resseq=702 icode= >
+<Residue HOH het=W resseq=704 icode= >
+<Residue HOH het=W resseq=705 icode= >
+<Residue HOH het=W resseq=706 icode= >
+<Residue HOH het=W resseq=707 icode= >
+<Residue HOH het=W resseq=708 icode= >
+<Residue HOH het=W resseq=709 icode= >
+<Residue HOH het=W resseq=710 icode= >
+<Residue HOH het=W resseq=711 icode= >
+<Residue HOH het=W resseq=712 icode= >
+<Residue HOH het=W resseq=713 icode= >
+<Residue HOH het=W resseq=714 icode= >
+<Residue HOH het=W resseq=715 icode= >
+<Residue HOH het=W resseq=716 icode= >
+<Residue HOH het=W resseq=717 icode= >
+<Residue HOH het=W resseq=719 icode= >
+<Residue HOH het=W resseq=720 icode= >
+<Residue HOH het=W resseq=721 icode= >
+<Residue HOH het=W resseq=722 icode= >
+<Residue HOH het=W resseq=723 icode= >
+<Residue HOH het=W resseq=726 icode= >
+<Residue LYS het=  resseq=8 icode= >
+<Residue SER het=  resseq=9 icode= >
+<Residue PHE het=  resseq=10 icode= >
+<Residue PRO het=  resseq=11 icode= >
+<Residue GLU het=  resseq=12 icode= >
+<Residue VAL het=  resseq=13 icode= >
+<Residue VAL het=  resseq=14 icode= >
+<Residue GLY het=  resseq=15 icode= >
+<Residue LYS het=  resseq=16 icode= >
+<Residue THR het=  resseq=17 icode= >
+<Residue VAL het=  resseq=18 icode= >
+<Residue ASP het=  resseq=19 icode= >
+<Residue GLN het=  resseq=20 icode= >
+<Residue ALA het=  resseq=21 icode= >
+<Residue ARG het=  resseq=22 icode= >
+<Residue GLU het=  resseq=23 icode= >
+<Residue TYR het=  resseq=24 icode= >
+<Residue PHE het=  resseq=25 icode= >
+<Residue THR het=  resseq=26 icode= >
+<Residue LEU het=  resseq=27 icode= >
+<Residue HIS het=  resseq=28 icode= >
+<Residue TYR het=  resseq=29 icode= >
+<Residue PRO het=  resseq=30 icode= >
+<Residue GLN het=  resseq=31 icode= >
+<Residue TYR het=  resseq=32 icode= >
+<Residue ASP het=  resseq=33 icode= >
+<Residue VAL het=  resseq=34 icode= >
+<Residue TYR het=  resseq=35 icode= >
+<Residue PHE het=  resseq=36 icode= >
+<Residue LEU het=  resseq=37 icode= >
+<Residue PRO het=  resseq=38 icode= >
+<Residue GLU het=  resseq=39 icode= >
+<Residue GLY het=  resseq=40 icode= >
+<Residue SER het=  resseq=41 icode= >
+<Residue PRO het=  resseq=42 icode= >
+<Residue VAL het=  resseq=43 icode= >
+<Residue THR het=  resseq=44 icode= >
+<Residue LEU het=  resseq=45 icode= >
+<Residue ASP het=  resseq=46 icode= >
+<Residue LEU het=  resseq=47 icode= >
+<Residue ARG het=  resseq=48 icode= >
+<Residue TYR het=  resseq=49 icode= >
+<Residue ASN het=  resseq=50 icode= >
+<Residue ARG het=  resseq=51 icode= >
+<Residue VAL het=  resseq=52 icode= >
+<Residue ARG het=  resseq=53 icode= >
+<Residue VAL het=  resseq=54 icode= >
+<Residue PHE het=  resseq=55 icode= >
+<Residue TYR het=  resseq=56 icode= >
+<Residue ASN het=  resseq=57 icode= >
+<Residue PRO het=  resseq=58 icode= >
+<Residue GLY het=  resseq=59 icode= >
+<Residue THR het=  resseq=60 icode= >
+<Residue ASN het=  resseq=61 icode= >
+<Residue VAL het=  resseq=62 icode= >
+<Residue VAL het=  resseq=63 icode= >
+<Residue ASN het=  resseq=64 icode= >
+<Residue HIS het=  resseq=65 icode= >
+<Residue VAL het=  resseq=66 icode= >
+<Residue PRO het=  resseq=67 icode= >
+<Residue HIS het=  resseq=68 icode= >
+<Residue VAL het=  resseq=69 icode= >
+<Residue GLY het=  resseq=70 icode= >
+<Residue HOH het=W resseq=422 icode= >
+<Residue HOH het=W resseq=460 icode= >
+<Residue HOH het=W resseq=461 icode= >
+<Residue HOH het=W resseq=462 icode= >
+<Residue HOH het=W resseq=464 icode= >
+<Residue HOH het=W resseq=465 icode= >
+<Residue HOH het=W resseq=466 icode= >
+<Residue HOH het=W resseq=467 icode= >
+<Residue HOH het=W resseq=468 icode= >
+<Residue HOH het=W resseq=470 icode= >
+<Residue HOH het=W resseq=471 icode= >
+<Residue HOH het=W resseq=506 icode= >
+<Residue HOH het=W resseq=507 icode= >
+<Residue HOH het=W resseq=508 icode= >
+<Residue HOH het=W resseq=510 icode= >
+<Residue HOH het=W resseq=511 icode= >
+<Residue HOH het=W resseq=512 icode= >
+<Residue HOH het=W resseq=520 icode= >
+<Residue HOH het=W resseq=521 icode= >
+<Residue HOH het=W resseq=526 icode= >
+<Residue HOH het=W resseq=534 icode= >
+<Residue HOH het=W resseq=602 icode= >
+<Residue HOH het=W resseq=605 icode= >
+<Residue HOH het=W resseq=609 icode= >
+<Residue HOH het=W resseq=610 icode= >
+<Residue HOH het=W resseq=623 icode= >
+<Residue HOH het=W resseq=703 icode= >
+<Residue HOH het=W resseq=718 icode= >
+<Residue HOH het=W resseq=725 icode= >
+Len: 446
+__________________________________________________   ATOMS   __________________________________________________
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom SG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom CD1>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom CD1>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom OE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom OE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom NE1>
+<Atom CE2>
+<Atom CE3>
+<Atom CZ2>
+<Atom CZ3>
+<Atom CH2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom NE1>
+<Atom CE2>
+<Atom CE3>
+<Atom CZ2>
+<Atom CZ3>
+<Atom CH2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom OD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom CE>
+<Atom NZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom ND1>
+<Atom CD2>
+<Atom CE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom SG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom CD1>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom OE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom NE1>
+<Atom CE2>
+<Atom CE3>
+<Atom CZ2>
+<Atom CZ3>
+<Atom CH2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom ND1>
+<Atom CD2>
+<Atom CE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom SG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom OD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom OE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom OD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom OE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom CE>
+<Atom NZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom CD1>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom CE>
+<Atom NZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom CE>
+<Atom NZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom CD1>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom CE>
+<Atom NZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom CE>
+<Atom NZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom CE>
+<Atom NZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom OH>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom CD1>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom OD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom CD1>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom CE>
+<Atom NZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom SG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom OD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom OD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom SG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom NE1>
+<Atom CE2>
+<Atom CE3>
+<Atom CZ2>
+<Atom CZ3>
+<Atom CH2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom NE>
+<Atom CZ>
+<Atom NH1>
+<Atom NH2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom OH>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom OD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom NE>
+<Atom CZ>
+<Atom NH1>
+<Atom NH2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom SG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom CE>
+<Atom NZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom CE>
+<Atom NZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom OH>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom NE1>
+<Atom CE2>
+<Atom CE3>
+<Atom CZ2>
+<Atom CZ3>
+<Atom CH2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom CE>
+<Atom NZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom CD1>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom CE>
+<Atom NZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom OD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom SD>
+<Atom CE>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom CD1>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom SG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom SG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom SD>
+<Atom CE>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom OD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom SG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom CE>
+<Atom NZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom CE>
+<Atom NZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom NE1>
+<Atom CE2>
+<Atom CE3>
+<Atom CZ2>
+<Atom CZ3>
+<Atom CH2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom CD1>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom NE1>
+<Atom CE2>
+<Atom CE3>
+<Atom CZ2>
+<Atom CZ3>
+<Atom CH2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom SG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom OH>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom NE>
+<Atom CZ>
+<Atom NH1>
+<Atom NH2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom NE1>
+<Atom CE2>
+<Atom CE3>
+<Atom CZ2>
+<Atom CZ3>
+<Atom CH2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom OXT>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom CE>
+<Atom NZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom OE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom CE>
+<Atom NZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom OD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom NE>
+<Atom CZ>
+<Atom NH1>
+<Atom NH2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom OE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom OH>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom ND1>
+<Atom CD2>
+<Atom CE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom OH>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom OH>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom OD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom OH>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom OE1>
+<Atom OE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom OD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom NE>
+<Atom CZ>
+<Atom NH1>
+<Atom NH2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom OH>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom NE>
+<Atom CZ>
+<Atom NH1>
+<Atom NH2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom NE>
+<Atom CZ>
+<Atom NH1>
+<Atom NH2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD1>
+<Atom CD2>
+<Atom CE1>
+<Atom CE2>
+<Atom CZ>
+<Atom OH>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom OG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom OD1>
+<Atom ND2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom ND1>
+<Atom CD2>
+<Atom CE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom CD>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG>
+<Atom ND1>
+<Atom CD2>
+<Atom CE1>
+<Atom NE2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom CB>
+<Atom CG1>
+<Atom CG2>
+<Atom N>
+<Atom CA>
+<Atom C>
+<Atom O>
+<Atom OXT>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+<Atom O>
+Len: 2431

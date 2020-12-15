@@ -1,0 +1,250 @@
+# General imports
+import os
+import math
+import pandas as pd
+import numpy as np
+import itertools
+import time
+import glob
+# Project specific imports
+import torch
+from torch.utils.data import Dataset, DataLoader
+from torchvision import transforms
+# Imports from internal libraries
+from mol_readers.pdbind import PDBindDataset, PandasMolStructure
+import config
+from feature_constructors import categorical, distogram_features
+import visualizations.heatmaps as vis_hm
+
+# Typing imports
+from typing import TYPE_CHECKING
+# if TYPE_CHECKING:
+
+
+class DistDistSequenceDataset(Dataset):
+    """Dataset used for first iteration of the model where we try to predict interaction distogram
+    based on 2 protein distograms and sequence matrices of these 2 proteins. 
+
+    Args:
+        Dataset ([type]): [description]
+    """
+
+    def __init__(self, data_table: pd.DataFrame,
+                 shape: int,
+                 set_type="whole",
+                 feature_type="split",
+                 split={"train": 0.8, "val": 0.1, "test": 0.1},
+                 split_variant=0,
+                 ):
+
+        types = ["whole", "train", "val", "test"]
+        feature_types = ["split", "stacked"]
+        assert set_type in types, f"Wrong type specified: {set_type}. Possible types are: {types}"
+        assert feature_type in feature_types, f"Wrong feature type: {feature_type}. Possible are {feature_types}"
+        assert math.isclose(sum(split.values()),1), f"Split schema: {split} should sum up to 1"
+        self.set_type = set_type
+        self.feature_type = feature_type
+        self.split = split
+        self.data_table = data_table
+        self.shape = shape
+        self.split_variant = split_variant
+        self._split_generator_ = self._split_generator_fun_(verbose=True)
+        if self.set_type != "whole":
+            self.data_table = self.data_table[self._get_nth_split_(
+                self.split_variant)]
+
+    def _split_generator_fun_(self, verbose=False):
+        i = 0
+        while True:
+            np.random.seed(i)
+            choice = np.random.choice(
+                list(self.split.keys()), self.__len__(), p=list(self.split.values()))
+            (unique, counts) = np.unique(choice, return_counts=True)
+            counts = dict(zip(unique, counts))
+            epsilon = 0.02
+
+            test_results = []
+            ratios = []
+            gen_split = (x for x in self.split if self.split[x] > 0.0)
+            for t in gen_split:
+                try:
+                    p_opt = self.split[t]
+                    n_opt = counts[t]
+                except:
+                    test_results.append(False)
+                    ratios.append("Value missing")
+                opt_ratio = n_opt/self.__len__()
+                opt_test = opt_ratio > p_opt-epsilon and opt_ratio < p_opt + epsilon
+                test_results.append(opt_test)
+                ratios.append(opt_ratio)
+
+            i += 1
+            if all(test_results):
+                if verbose:
+                    print(
+                        f"Sample seed: {i} OK. Ratios are:{ratios}, Counts: {counts}")
+                yield choice == self.set_type
+            else:
+                if verbose:
+                    print(
+                        f"Sample seed: {i} NOT OK. Ratios are:{ratios}, Counts: {counts}")
+
+    def _get_nth_split_(self, n):
+        return next(itertools.islice(self._split_generator_, n, None))
+
+    @staticmethod
+    def visualize_features(sample, image_dir, verbose=True):
+        if not os.path.exists(image_dir):
+            os.makedirs(image_dir)
+
+        print(f"Sample name: {sample['pdb_path']}")
+        for k in sample:
+            if k != "pdb_path":
+                name = f"{k}.png"
+                fig = vis_hm.protein_distogram_heatmap(sample[k])
+                if verbose:
+                    print(f"Saving image: {image_dir}/{name}")
+                fig.write_image(f"{image_dir}/{name}")
+        return True
+
+    @staticmethod
+    def visualize_stacked_features(sample, image_dir, verbose=True):
+        if not os.path.exists(image_dir):
+            os.makedirs(image_dir)
+        feature = sample["feature"]
+        for i, f in enumerate(feature):
+            name = f"{i}.png"
+            fig = vis_hm.protein_distogram_heatmap(f)
+            if verbose:
+                print(f"Saving image: {image_dir}/{name}")
+            fig.write_image(f"{image_dir}/{name}")
+
+    @staticmethod
+    def visualize_batch(batch, image_dir, verbose=True):
+        batch_size = len(batch["pdb_path"])
+        for i in range(batch_size):
+            for k in batch:
+                if k != "pdb_path":
+                    name = f"{k}.png"
+                    fig = vis_hm.protein_distogram_heatmap(batch[k][i])
+                    dirname = f"{image_dir}/batch_{i}"
+                    if not os.path.exists(dirname):
+                        os.makedirs(dirname)
+                    if verbose:
+                        print(f"Saving image: {dirname}/{name}")
+                    fig.write_image(f"{dirname}/{name}")
+
+    def cache_it(self, cache_dir):
+        t = time.localtime()
+        creation_date = f"{t.tm_year}{t.tm_mon:>02}{t.tm_mday:>02}_{t.tm_hour:>02}_{t.tm_min:>02}_{t.tm_sec:>02}"
+        cache_dir = f"{cache_dir}_{creation_date}"
+        if not os.path.exists(cache_dir):
+            os.makedirs(cache_dir, exist_ok=True)
+
+        for i in range(len(self)):
+            sample = self[i]
+            print(f"sample:{i}, {sample['pdb_path']}")
+            _, filename = os.path.split(sample["pdb_path"])
+            sample_dir_name = f"{i}_{filename}"
+            sample_path = f"{cache_dir}/{sample_dir_name}"
+            if not os.path.exists(sample_path):
+                os.makedirs(sample_path)
+            feature = sample["feature"].numpy()
+            target = sample["dg_inter"].numpy()
+            np.save(f"{sample_path}/feature.npy", feature)
+            np.save(f"{sample_path}/target.npy", target)
+
+    def __len__(self):
+        return self.data_table.shape[0]
+
+    def __getitem__(self, idx):
+        row = self.data_table.iloc[idx]
+
+        file = row["protein"]
+        # print(file)
+        pdb_structure = PandasMolStructure()
+        pdb_structure.get_pandas_structure(file)
+        # print(pdb_structure.get_pandas_structure()["model"].unique())
+
+        # Categorical features
+        seq = categorical.AA_to_ordinal(config.AMINO_ACIDS, pdb_structure)
+        seq1 = seq[seq["chain"] == seq["chain"].unique()[0]
+                   ]["ordinal_zero_one"]
+        seq2 = seq[seq["chain"] == seq["chain"].unique()[1]
+                   ]["ordinal_zero_one"]
+        seq1 = seq1.to_numpy()
+        seq2 = seq2.to_numpy()
+        cat_horizontal_1, cat_vertical_1 = categorical.get_2D_feature_map(
+            seq1, self.shape)
+        cat_horizontal_2, cat_vertical_2 = categorical.get_2D_feature_map(
+            seq2, self.shape)
+
+        # Distogram features
+        dg_ch1, dg_ch2, dg_inter = distogram_features.distogram_2cahin(
+            pdb_structure, self.shape)
+
+        if self.feature_type == "split":
+            sample = {
+                "pdb_path": file,
+                "dg_ch1": dg_ch1,
+                "dg_ch2": dg_ch2,
+                "dg_inter": dg_inter,
+                "cat_horizontal_1": cat_horizontal_1,
+                "cat_vertical_1": cat_vertical_1,
+                "cat_horizontal_2": cat_horizontal_2,
+                "cat_vertical_2": cat_vertical_2
+            }
+        elif self.feature_type == "stacked":
+
+            feature = np.array([
+                dg_ch1, cat_horizontal_1, cat_vertical_1,
+                dg_ch2, cat_horizontal_2, cat_vertical_2
+            ])
+
+            feature_trans = transforms.Compose([
+                transforms.Lambda(lambda x: torch.from_numpy(x)),
+                transforms.Normalize(mean=feature.mean(axis=(1, 2)),
+                                     std=feature.std(axis=(1, 2)))
+            ])
+
+            target_trans = transforms.Compose([
+                transforms.ToTensor(),
+                transforms.Normalize(mean=dg_inter.mean(),
+                                     std=dg_inter.std())
+            ])
+
+            sample = {
+                "pdb_path": file,
+                "feature": feature_trans(feature),
+                "dg_inter": target_trans(dg_inter)
+            }
+        else:
+            raise ValueError("Unknown feature_type")
+
+        return sample
+
+    def __str__(self):
+        big_center = 15
+        small_center = 10
+        s = f"Dataset object: {type(self).__name__} \n"
+        s += f"{'Lenght:':^{small_center}}|{'Feature size:':^{big_center}}|{'Set type:':^{big_center}}|{'Split type:':^{big_center}}|{'train:':^{small_center}}|{'val:':^{small_center}}|{'test:':^{small_center}}\n"
+        s += f"{'-'*(3*big_center + 4*small_center)}\n"
+        s += f"{self.__len__():^{small_center}}|{self.shape:^{big_center}}|{self.set_type:^{big_center}}|{self.feature_type:^{big_center}}|{self.split['train']:^{small_center}}|{self.split['val']:^{small_center}}|{self.split['test']:^{small_center}}\n"
+        return s
+
+if __name__ == '__main__':
+    print(f'Running {__file__}')
+    print(f"Script dir:  {os.path.dirname(os.path.abspath(__file__))}")
+    print(f"Working dir: {os.path.abspath(os.getcwd())}")
+
+    sql_db = PDBindDataset(config.PDBIND_SQLITE_DB)
+    samples = sql_db.get_2chain_samples()
+
+
+    print("Caching dataset")
+    whole_set = DistDistSequenceDataset(
+        samples, 512, set_type="whole", feature_type="stacked")
+    # whole_set.cache_it("./data/caches/chace2")
+    whole_set[0]
+    print("Finished")
+
