@@ -10,6 +10,7 @@ data/data/*
 data/caches/*
 loggs
 temp_and_demos/*.pdb
+*.mp4
 
 
 # Artefacts

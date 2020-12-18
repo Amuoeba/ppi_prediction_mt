@@ -216,13 +216,13 @@ def update_train_and_val_graphs(selected_experiment):
 @app.server.route("/static/<experiment>/nn_vis/<epoch>/filter_viss/<layer>/weight_distributions.png")
 def serve_image_1(experiment, epoch, layer):
     f_name = f"{experiment}/nn_vis/{epoch}/filter_viss/{layer}/weight_distributions.png"
-    print(f"Serving image {f_name}")
+    print(f"Serving image 2: {f_name}")
     return flask.send_from_directory(config.LOG_PATH, f_name)
 
 @app.server.route("/static/<experiment>/nn_vis/<epoch>/<sample>/<layer>/<image>.png")
 def serve_image_2(experiment, epoch, sample, layer, image):
     f_name = f"{experiment}/nn_vis/{epoch}/{sample}/{layer}/{image}.png"
-    print(f"Serving image {f_name}")
+    print(f"Serving image 1: {f_name}")
     image = cv2.imread(f"{config.LOG_PATH}/{f_name}")
     image = cv2.resize(image, (300, 300), interpolation=cv2.INTER_AREA)
     retval, buffer = cv2.imencode('.jpg', image)
