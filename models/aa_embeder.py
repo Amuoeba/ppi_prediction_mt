@@ -23,5 +23,8 @@ if __name__ == '__main__':
     pdb_struct = PandasMolStructure()
     protein_structure = pdb_struct.get_pandas_structure(samples["protein"][0])
     seq = pdb_struct.get_protein_sequence()
+    
+    
+
 
     a = 1

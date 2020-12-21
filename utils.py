@@ -125,17 +125,23 @@ def get_num_params(torch_module):
 
 
 class TrainLogger:
-    def __init__(self, log_path):
+    def __init__(self, log_path,existing=None):
         super().__init__()
         self.log_path = log_path        
         t = time.localtime()
-        self.current_log = f"{t.tm_year}_{t.tm_mon:>02}_{t.tm_mday:>02}_{t.tm_hour:>02}_{t.tm_min:>02}_{t.tm_sec:>02}_latest"
+        
+        if existing:
+            assert existing in os.listdir(self.log_path)
+            self.current_log = existing
+        else:
+            self.current_log = f"{t.tm_year}_{t.tm_mon:>02}_{t.tm_mday:>02}_{t.tm_hour:>02}_{t.tm_min:>02}_{t.tm_sec:>02}_latest"
         self.current_path = f"{self.log_path}/{self.current_log}"
         self.nn_vis_path = f"{self.current_path}/nn_vis"
         self.image_path = f"{self.current_path}/images"
         self.train_log = f"{self.current_path}/train_log.txt"
         self.val_log = f"{self.current_path}/val_log.txt"
         self.test_log = f"{self.current_path}/test_log.txt"
+        self.videos_path = f"{self.current_path}/videos"
 
         # Create paths
         # Path(self.current_path).mkdir(parents=True, exist_ok=True)
@@ -148,7 +154,9 @@ class TrainLogger:
         self.remove_latest_tag()
         Path(self.current_path).mkdir(parents=True, exist_ok=True)
         Path(self.image_path).mkdir(parents=True, exist_ok=True)
+        Path(self.videos_path).mkdir(parents=True, exist_ok=True)
         self._init_files_()
+        return self
     
     def _init_files_(self):
         with open(self.train_log,"w+") as tl:
@@ -211,6 +219,10 @@ class TrainLogger:
 
     
     def generrate_video_from_path(self,path:str,epoch_identifier:str):
+
+        #Generate videos path
+        Path(self.videos_path).mkdir(parents=True, exist_ok=True)
+
         print(f"Generating video for image: {path}, epoch identifier: {epoch_identifier}")
         left = path.split(epoch_identifier)[0]
         right = path.split(epoch_identifier)[1]
@@ -228,80 +240,16 @@ class TrainLogger:
             dim = (width, height)
             img_array.append(cv2.resize(img, dim, interpolation=cv2.INTER_AREA))
         
-        out = cv2.VideoWriter('project.mp4', cv2.VideoWriter_fourcc(*'H264'), 8, dim)
+        file_name = f"{os.path.splitext(os.path.split(right)[1])[0]}.mp4"
+        video_base_path =os.path.join(self.videos_path,os.path.split(right)[0])
+        Path(video_base_path).mkdir(parents=True, exist_ok=True)
+
+        video_out_path = os.path.join(video_base_path,file_name)
+        out = cv2.VideoWriter(video_out_path, cv2.VideoWriter_fourcc(*'H264'), 8, dim)
 
         for i in range(len(img_array)):
             out.write(img_array[i])
         out.release()
-
-        # clip = mp.VideoFileClip("project.mp4")
-        # clip.write_videofile("project.webm")
-
-                    
-
-
-
-
-    def manual_video_generation(self):
-        experiments = self.get_experiments()
-        print("Choose experiment:")
-        for i,experiment in enumerate(experiments):
-            print(f"{i}: {experiment}")
-        
-        print("Seslect experiment by typing number:")
-        # Get numerical input
-        exp_sel = self._get_numerical_input_()        
-        experiment = experiments[exp_sel]
-        print(f"Selected experiment: {exp_sel}: {experiment}")
-
-        print("Select video to generate:")
-        options = ["ativations","distributions"]
-        for i,opt in enumerate(options):
-            print(f"{i}: {opt}")
-        opt_sel = self._get_numerical_input_()
-        option = options[opt_sel]
-        print(f"Selected option: {option}")
-
-
-
-        print("Select example:")
-        samples = os.listdir(f"{experiment}/nn_vis/{0}")
-        for i,sample in enumerate(samples):
-            print(f"{i}: {sample}")
-        sample_sel = self._get_numerical_input_()
-        sample = samples[sample_sel]
-        print(f"Selected sample: {sample}")
-
-        print("Select Layer:")
-        layers = os.listdir(f"{experiment}/nn_vis/{0}/{sample}")
-        for i, layer in enumerate(layers):
-            print(f"{i}: {layer}")
-        
-        layer_sel = self._get_numerical_input_()
-        layer = layers[layer_sel]
-        print(f"Selected layer: {layer}")
-
-        print("Select filter:")
-        filters = os.listdir(f"{experiment}/nn_vis/{0}/{sample}/{layer}")
-        for i, filt in enumerate(filters):
-            print(f"{i}: {filt}")
-        
-        filt_sel = self._get_numerical_input_()
-        filter = filters[filt_sel]
-        print(f"Selected filter: {filter}")
-
-        
-
-
-
-
-
-
-        
-
-        
-
-
 
 
     def __repr__(self):
@@ -311,7 +259,11 @@ class TrainLogger:
 logger = TrainLogger(config.LOG_PATH)
 
 if __name__ == "__main__":
-    path = "/home/erikj/projects/insidrug/py_proj/erikj/loggs/2020_12_01_12_06_38_latest/nn_vis/0/25_1buh_ent_pdb/downscale.cnn_1/filt_0.png"
+    path = "/home/erikj/projects/insidrug/py_proj/erikj/loggs/2020_12_01_12_06_38/nn_vis/0/25_1buh_ent_pdb/downscale.cnn_1/filt_0.png"
+    path = "/home/erikj/projects/insidrug/py_proj/erikj/loggs/2020_12_01_12_06_38/nn_vis/0/filter_viss/.T_cnn_1/weight_distributions.png"
+
+    logger = TrainLogger(config.LOG_PATH,existing="2020_12_01_12_06_38")
+    
     logger.generrate_video_from_path(path,"/0/")
     
 
