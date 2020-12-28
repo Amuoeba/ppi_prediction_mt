@@ -2,7 +2,7 @@
 import os
 from sqlite3.dbapi2 import SQLITE_SELECT
 from numpy.core.numeric import True_
-
+import multiprocessing
 from numpy.lib.arraysetops import unique
 # Project specific imports
 
@@ -28,7 +28,7 @@ class ProteinSequenceDataset:
         super().__init__()
         self.pdb_paths = pdb_paths
         self.special_tokens = {"sequence_start":"START","sequence_end":"END"}
-        self.token_set = set()
+        self.token_set = set(list(self.special_tokens.values()))
         self.sequences = []
 
     
@@ -76,6 +76,32 @@ class ProteinSequenceDataset:
                 uc_seq.insert(0,self.special_tokens["sequence_start"])
                 uc_seq.append(self.special_tokens["sequence_end"])
                 self.sequences.append(uc_seq)
+        return self
+
+    
+    def _generate_dataset_mp_aux_(self,pdb):
+        i,pdb = pdb
+        print(f"Extracting sequence data from {i}: {pdb}\r",end="")
+        unique_chains = self.get_chain_sequences(pdb,unique=True)
+        chains = []
+        for uc in unique_chains:            
+            unique_residues = set(uc.residue.unique())
+            uc_seq = list(uc.residue)
+            uc_seq.insert(0,self.special_tokens["sequence_start"])
+            uc_seq.append(self.special_tokens["sequence_end"])
+
+            uc_data = {"seq":uc_seq,"unique_residues":unique_residues}
+            chains.append(uc_data)        
+        return chains
+
+    def generate_dataset_mp(self):
+        pool = multiprocessing.Pool(processes=multiprocessing.cpu_count() - 1)
+        results = pool.map(self._generate_dataset_mp_aux_,list(enumerate(self.pdb_paths)))
+        for r in results:
+            for chain in r:
+                self.sequences.append(chain["seq"])
+                self.token_set = self.token_set.union(chain["unique_residues"])
+        return self
 
         
 
@@ -93,5 +119,6 @@ if __name__ == '__main__':
 
     seq_dataset = ProteinSequenceDataset(samples.protein)
 
-    seq_dataset.generate_dataset()
+    # seq_dataset.generate_dataset()
+    seq_dataset.generate_dataset_mp()
     a = 1
