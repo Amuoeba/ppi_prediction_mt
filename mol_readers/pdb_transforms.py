@@ -8,6 +8,7 @@ from Bio.PDB import PDBParser, Structure
 from sklearn.metrics.pairwise import euclidean_distances
 # Imports from internal libraries
 import utils
+import config_old
 import config
 
 
@@ -61,7 +62,7 @@ class PandasMolStructure:
         else:
             # het_atoms_to_ignore = ["HOH","NAG", "FUC", "MAN", "GAL", "SO4"]
             # FIXME Atoms to ignore should be based on HETATOM
-            atoms_to_not_ignore = utils.get_AA_list(config.AMINO_ACIDS)
+            atoms_to_not_ignore = utils.get_AA_list(config.folder_structure_cfg.aminoacids_csv)
             return self.df_structure[self.df_structure["residue"].isin(atoms_to_not_ignore)]
 
     def get_atom_3Dcoord(self, pdb_file: str) -> np.array:

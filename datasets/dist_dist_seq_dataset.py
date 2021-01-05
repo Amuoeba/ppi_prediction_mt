@@ -12,7 +12,7 @@ from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
 # Imports from internal libraries
 from mol_readers.pdbind import PDBindDataset, PandasMolStructure
-import config
+import config_old
 from feature_constructors import categorical, distogram_features
 import visualizations.heatmaps as vis_hm
 
@@ -167,7 +167,7 @@ class DistDistSequenceDataset(Dataset):
         # print(pdb_structure.get_pandas_structure()["model"].unique())
 
         # Categorical features
-        seq = categorical.AA_to_ordinal(config.AMINO_ACIDS, pdb_structure)
+        seq = categorical.AA_to_ordinal(config_old.AMINO_ACIDS, pdb_structure)
         seq1 = seq[seq["chain"] == seq["chain"].unique()[0]
                    ]["ordinal_zero_one"]
         seq2 = seq[seq["chain"] == seq["chain"].unique()[1]
@@ -237,7 +237,7 @@ if __name__ == '__main__':
     print(f"Script dir:  {os.path.dirname(os.path.abspath(__file__))}")
     print(f"Working dir: {os.path.abspath(os.getcwd())}")
 
-    sql_db = PDBindDataset(config.PDBIND_SQLITE_DB)
+    sql_db = PDBindDataset(config.folder_structure_cfg.PDBind_sql)
     samples = sql_db.get_2chain_samples()
 
 

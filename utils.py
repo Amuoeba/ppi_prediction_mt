@@ -14,6 +14,7 @@ import cv2
 import moviepy.editor as mp
 # Imports from internal libraries
 from visualizations.heatmaps import output_target_heatmaps
+import config_old
 import config
 
 
@@ -256,13 +257,13 @@ class TrainLogger:
         s = f"Logger object | Root: {self.current_path}"
         return s
 
-logger = TrainLogger(config.LOG_PATH)
+logger = TrainLogger(config.folder_structure_cfg.log_path)
 
 if __name__ == "__main__":
     path = "/home/erikj/projects/insidrug/py_proj/erikj/loggs/2020_12_01_12_06_38/nn_vis/0/25_1buh_ent_pdb/downscale.cnn_1/filt_0.png"
     path = "/home/erikj/projects/insidrug/py_proj/erikj/loggs/2020_12_01_12_06_38/nn_vis/0/filter_viss/.T_cnn_1/weight_distributions.png"
 
-    logger = TrainLogger(config.LOG_PATH,existing="2020_12_01_12_06_38")
+    logger = TrainLogger(config_old.LOG_PATH, existing="2020_12_01_12_06_38")
     
     logger.generrate_video_from_path(path,"/0/")
     

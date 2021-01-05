@@ -6,7 +6,7 @@ import sqlite3
 # Imports from internal libraries
 from mol_readers.pdbind import PDBindDataset, PandasMolStructure
 import feature_constructors.categorical as catFeatures
-import config
+import config_old
 # Typing imports
 from typing import TYPE_CHECKING
 # if TYPE_CHECKING:
@@ -17,7 +17,7 @@ if __name__ == '__main__':
     print(f"Script dir:  {os.path.dirname(os.path.abspath(__file__))}")
     print(f"Working dir: {os.path.abspath(os.getcwd())}")
 
-    sql_db = PDBindDataset(config.PDBIND_SQLITE_DB)
+    sql_db = PDBindDataset(config.folder_structure_cfg.PDBind_sql)
     samples = sql_db.get_all_pdbs()
 
     pdb_struct = PandasMolStructure()

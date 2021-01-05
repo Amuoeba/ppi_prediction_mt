@@ -13,7 +13,7 @@ from visualizations.dash_app.app import app
 from visualizations.dash_app.components.navbar import Navbar
 from visualizations.heatmaps import protein_distogram_heatmap, train_val_figure
 from mol_readers.pdb_transforms import PandasMolStructure
-import config
+import config_old
 import utils as ut
 # Typing imports
 from typing import TYPE_CHECKING

@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from typing import List
 # Project specific imports
-import config
+import config_old
 
 # Imports from internal libraries
 
@@ -104,7 +104,7 @@ if __name__ == '__main__':
     pdb_struct = PandasMolStructure()
     pdb_struct.get_pandas_structure(test_file)
 
-    seq = AA_to_ordinal(config.AMINO_ACIDS, pdb_struct)
+    seq = AA_to_ordinal(config_old.AMINO_ACIDS, pdb_struct)
     seq1 = seq[seq["chain"] == seq["chain"].unique()[0]
                    ]["residue"]
 

@@ -2,7 +2,7 @@
 import os
 import sys
 # Imports from internal libraries
-import config
+import config_old
 from mol_readers import pdbind as DS_pdbind
 
 print(os.curdir)

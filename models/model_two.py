@@ -9,7 +9,7 @@ import torch.nn as nn
 import torch.optim as optim
 # Imports from internal libraries
 from datasets.distogram_sequence_dataset import DistogramSequenceDataset, CachedDistogramSequenceDataset, PDBindDataset, PandasMolStructure
-import config
+import config_old
 import utils
 from nn_utils.hook_manager import HookManager, VisHookManager, VisDispatcher
 
@@ -135,8 +135,8 @@ if __name__ == '__main__':
     test_set = CachedDistogramSequenceDataset(
         cache_root, "test", split_variant=0)
 
-    train_loader = DataLoader(train_set, batch_size=config.BATCH_SIZE,
-                              shuffle=True, num_workers=config.DATALOADER_WORKERS,
+    train_loader = DataLoader(train_set, batch_size=config_old.BATCH_SIZE,
+                              shuffle=True, num_workers=config_old.DATALOADER_WORKERS,
                               drop_last=True)
 
     val_loader = DataLoader(val_set, batch_size=3,
@@ -159,7 +159,7 @@ if __name__ == '__main__':
                                 "T_cnn_1", "T_cnn_2", "T_cnn_3", "T_cnn_4"])
     # hook_manager.register_hooks()
 
-    vis_dispatcher = VisDispatcher(config.VIS_WORKERS_ACT, config.VIS_WORKERS_FILT)
+    vis_dispatcher = VisDispatcher(config_old.VIS_WORKERS_ACT, config_old.VIS_WORKERS_FILT)
     vis_hook_manager = VisHookManager(interactionNet, vis_dispatcher,
                                       activation_vis_hookable=[{"downscale": ["cnn_1"]}],
                                       filter_vis_hookable=[{"downscale": ["cnn_1", "cnn_2", "cnn_3", "cnn_4", "cnn_5", "cnn_6", "cnn_7"]},

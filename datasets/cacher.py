@@ -6,7 +6,7 @@ import time
 from torch.utils.data import Dataset
 import torch
 # Imports from internal libraries
-import config
+import config_old
 from datasets.distogram_sequence_dataset import DistogramSequenceDataset
 from datasets.distogram_sequence_dataset import DistogramSequenceDataset, PDBindDataset, PandasMolStructure
 # Typing imports
@@ -37,7 +37,7 @@ if __name__ == '__main__':
     print(f"Script dir:  {os.path.dirname(os.path.abspath(__file__))}")
     print(f"Working dir: {os.path.abspath(os.getcwd())}")
 
-    sql_db = PDBindDataset(config.PDBIND_SQLITE_DB)
+    sql_db = PDBindDataset(config.folder_structure_cfg.PDBind_sql)
     samples = sql_db.get_2chain_samples()
     train_set = DistogramSequenceDataset(
         samples, 512, set_type="whole", feature_type="stacked")

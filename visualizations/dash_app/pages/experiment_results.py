@@ -14,7 +14,7 @@ from visualizations.dash_app.app import app
 import utils as ut
 from visualizations.heatmaps import protein_distogram_heatmap, train_val_figure
 from visualizations.dash_app.components.navbar import Navbar
-import config
+import config_old
 # Typing imports
 from typing import TYPE_CHECKING
 # if TYPE_CHECKING:
@@ -26,19 +26,19 @@ def get_experiments(exp_root):
     return logs
 
 def get_nn_vis_epochs(experiment_root):
-    return os.listdir(f"{config.LOG_PATH}/{experiment_root}/nn_vis/")
+    return os.listdir(f"{config_old.LOG_PATH}/{experiment_root}/nn_vis/")
 
 def get_layers_filter_vis(experiment_root):
-    return os.listdir(f"{config.LOG_PATH}/{experiment_root}/nn_vis/0/filter_viss/")
+    return os.listdir(f"{config_old.LOG_PATH}/{experiment_root}/nn_vis/0/filter_viss/")
 
 def get_samples_activation_vis(experiment_root):
-    samples = os.listdir(f"{config.LOG_PATH}/{experiment_root}/nn_vis/0/")
+    samples = os.listdir(f"{config_old.LOG_PATH}/{experiment_root}/nn_vis/0/")
     samples = [x for x in samples if x != "filter_viss"]
     return samples
 
 def get_layers_activation_vis(experiment_root, sample):
     layers = os.listdir(
-        f"{config.LOG_PATH}/{experiment_root}/nn_vis/0/{sample}/")
+        f"{config_old.LOG_PATH}/{experiment_root}/nn_vis/0/{sample}/")
     return layers
 
 def bae64_encoded_image(image_path):
@@ -49,7 +49,7 @@ def bae64_encoded_image(image_path):
     image_encoded_string = f"data:image/jpg;base64,{image_encoded_string}"
     return image_encoded_string
 
-logs = get_experiments(config.LOG_PATH)
+logs = get_experiments(config_old.LOG_PATH)
 static_image_route = '/static/'
 
 
@@ -116,7 +116,7 @@ def ExperimentResults():
               [Input('interval-component', 'n_intervals')])
 def update_experiment_list(n):
     print("Updating experiments")
-    logs = get_experiments(config.LOG_PATH)
+    logs = get_experiments(config_old.LOG_PATH)
     opts = [{"label": f"{x[1]}", "value": f"{x[1]}"} for x in list(map(lambda x: os.path.split(x), logs))]
     return opts
 
@@ -183,9 +183,9 @@ def update_activations_image(slider_value, selected_experiment, selected_sample,
     print(f"Experiment: {selected_experiment}")
     print(f"layer: {selected_layer}")
     all_images = []
-    for image in os.listdir(f"{config.LOG_PATH}/{selected_experiment}/nn_vis/{slider_value}/{selected_sample}/{selected_layer}/"):
+    for image in os.listdir(f"{config_old.LOG_PATH}/{selected_experiment}/nn_vis/{slider_value}/{selected_sample}/{selected_layer}/"):
         # full_image_path = f"{static_image_route}{selected_experiment}/nn_vis/{slider_value}/{selected_sample}/{selected_layer}/{image}"
-        full_image_path = f"{config.LOG_PATH}/{selected_experiment}/nn_vis/{slider_value}/{selected_sample}/{selected_layer}/{image}"
+        full_image_path = f"{config_old.LOG_PATH}/{selected_experiment}/nn_vis/{slider_value}/{selected_sample}/{selected_layer}/{image}"
         all_images.append(html.Img(id='filter-activation-image', style={
                           'height': '500px', 'width': '500px'}, src=bae64_encoded_image(full_image_path)))
     return all_images
@@ -197,14 +197,14 @@ def update_activations_image(slider_value, selected_experiment, selected_sample,
 )
 def update_train_and_val_graphs(selected_experiment):
     print(
-        f"Selected experiment:{os.path.join(config.LOG_PATH,selected_experiment)}")
+        f"Selected experiment:{os.path.join(config_old.LOG_PATH, selected_experiment)}")
     _, train_log_name = os.path.split(ut.logger.train_log)
     train_log_path = os.path.join(
-        config.LOG_PATH, selected_experiment, train_log_name)
+        config_old.LOG_PATH, selected_experiment, train_log_name)
 
     _, val_log_name = os.path.split(ut.logger.val_log)
     val_log_path = os.path.join(
-        config.LOG_PATH, selected_experiment, val_log_name)
+        config_old.LOG_PATH, selected_experiment, val_log_name)
     print(train_log_path)
     print(val_log_path)
 
@@ -217,13 +217,13 @@ def update_train_and_val_graphs(selected_experiment):
 def serve_image_1(experiment, epoch, layer):
     f_name = f"{experiment}/nn_vis/{epoch}/filter_viss/{layer}/weight_distributions.png"
     print(f"Serving image 2: {f_name}")
-    return flask.send_from_directory(config.LOG_PATH, f_name)
+    return flask.send_from_directory(config_old.LOG_PATH, f_name)
 
 @app.server.route("/static/<experiment>/nn_vis/<epoch>/<sample>/<layer>/<image>.png")
 def serve_image_2(experiment, epoch, sample, layer, image):
     f_name = f"{experiment}/nn_vis/{epoch}/{sample}/{layer}/{image}.png"
     print(f"Serving image 1: {f_name}")
-    image = cv2.imread(f"{config.LOG_PATH}/{f_name}")
+    image = cv2.imread(f"{config_old.LOG_PATH}/{f_name}")
     image = cv2.resize(image, (300, 300), interpolation=cv2.INTER_AREA)
     retval, buffer = cv2.imencode('.jpg', image)
     image_encoded_string = str(base64.b64encode(buffer))[2:-1]

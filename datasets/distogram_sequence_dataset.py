@@ -28,6 +28,7 @@ class DistogramSequenceDataset(Dataset):
     Args:
         Dataset ([type]): [description]
     """
+    dataset_name = "DistogramSequenceDataset"
 
     def __init__(self, data_table: pd.DataFrame,
                  shape: int,
@@ -135,9 +136,7 @@ class DistogramSequenceDataset(Dataset):
                     fig.write_image(f"{dirname}/{name}")
 
     def cache_it(self, cache_dir):
-        t = time.localtime()
-        creation_date = f"{t.tm_year}{t.tm_mon:>02}{t.tm_mday:>02}_{t.tm_hour:>02}_{t.tm_min:>02}_{t.tm_sec:>02}"
-        cache_dir = f"{cache_dir}_{creation_date}"
+
         if not os.path.exists(cache_dir):
             os.makedirs(cache_dir, exist_ok=True)
 
@@ -167,7 +166,7 @@ class DistogramSequenceDataset(Dataset):
         # print(pdb_structure.get_pandas_structure()["model"].unique())
 
         # Categorical features
-        seq = categorical.AA_to_ordinal(config.AMINO_ACIDS, pdb_structure)
+        seq = categorical.AA_to_ordinal(config.folder_structure_cfg.aminoacids_csv, pdb_structure)
         seq1 = seq[seq["chain"] == seq["chain"].unique()[0]
                    ]["ordinal_zero_one"]
         seq2 = seq[seq["chain"] == seq["chain"].unique()[1]
@@ -313,7 +312,7 @@ if __name__ == '__main__':
     print(f"Script dir:  {os.path.dirname(os.path.abspath(__file__))}")
     print(f"Working dir: {os.path.abspath(os.getcwd())}")
 
-    sql_db = PDBindDataset(config.PDBIND_SQLITE_DB)
+    sql_db = PDBindDataset(config.folder_structure_cfg.PDBind_sql)
     samples = sql_db.get_2chain_samples()
 
     train_set = DistogramSequenceDataset(samples, 500, set_type="train")
@@ -321,7 +320,7 @@ if __name__ == '__main__':
     # test_set = DistogramSequenceDataset(samples, 500, set_type="test")
 
     train_set.visualize_features(
-        train_set[25], "/home/erikj/projects/insidrug/py_proj/erikj/notebooks/sample_images/sample_25")
+        train_set[25], "/home/erik/Projects/master_thesis/ppi_prediction_mt/test_samples/sample_25")
     # dataset.visualize_features(dataset[1],"/home/erikj/projects/insidrug/py_proj/erikj/notebooks/sample_images/sample_1")
     # dataset.visualize_features(dataset[10],"/home/erikj/projects/insidrug/py_proj/erikj/notebooks/sample_images/sample_10")
     # dataset.visualize_features(dataset[50],"/home/erikj/projects/insidrug/py_proj/erikj/notebooks/sample_images/sample_50")
@@ -344,7 +343,7 @@ if __name__ == '__main__':
 
 
     # print("Caching dataset")
-    # whole_set = DistogramSequenceDataset(
-    #     samples, 512, set_type="whole", feature_type="stacked")
-    # whole_set.cache_it("./data/caches/chace2")
-    # print("Finished")
+    whole_set = DistogramSequenceDataset(
+        samples, 512, set_type="whole", feature_type="stacked")
+    whole_set.cache_it("./data/caches/chace2")
+    print("Finished")
