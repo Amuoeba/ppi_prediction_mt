@@ -16,7 +16,8 @@ def Navbar():
     navbar = dbc.NavbarSimple(
         children=[
             dbc.NavItem(dbc.NavLink("Experiment explorer", href="/experiment-explorer")),
-            dbc.NavItem(dbc.NavLink("Distogram visualization", href="/distogram-visualization")),
+            dbc.NavItem(dbc.NavLink("Embedding visualisations", href="/embedding-visualizations")),
+            dbc.NavItem(dbc.NavLink("Distogram visualization", href="/distogram-visualization"))
             # dbc.DropdownMenu(
             #     nav=True,
             #     in_navbar=True,

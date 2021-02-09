@@ -68,6 +68,7 @@ class PPDbindURls:
 
 
 # Model settings dataclass
+
 @dataclass
 class ModelOne:
     DATALOADER_CACHE:pathlib.Path

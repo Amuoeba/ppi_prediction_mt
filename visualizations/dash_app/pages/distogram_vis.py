@@ -20,7 +20,7 @@ from typing import TYPE_CHECKING
 # if TYPE_CHECKING:
 
 
-test_pdb_file = "/home/erikj/projects/PDBind_exploration/data/pdbbind_v2019_PP/PP/1acb.ent.pdb"
+test_pdb_file = "/home/erik/Projects/master_thesis/data/pdbind/pdbbind_v2019_PP/PP/1fc2.ent.pdb"
 pdbStructure = PandasMolStructure()
 app_state = {"show_het_atoms": False}
 df = pdbStructure.get_pandas_structure(

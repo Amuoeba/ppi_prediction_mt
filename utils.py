@@ -2,6 +2,7 @@
 import hashlib
 import time
 import os
+import json
 from pathlib import Path
 import re
 from numpy.core.fromnumeric import clip
@@ -112,7 +113,7 @@ class Timer(object):
 
     def __exit__(self, type, value, traceback):
         self.end = time.time()
-        print(f"{self.description}: {self.end - self.start}")
+        print(f"\n{self.description} took: {self.end - self.start} sec")
 
 
 def get_AA_list(aa_file: str) -> List[str]:
@@ -126,23 +127,25 @@ def get_num_params(torch_module):
 
 
 class TrainLogger:
-    def __init__(self, log_path,existing=None):
+    def __init__(self, log_path, existing=None):
         super().__init__()
-        self.log_path = log_path        
+        self.log_path = log_path
         t = time.localtime()
-        
+
         if existing:
             assert existing in os.listdir(self.log_path)
             self.current_log = existing
         else:
             self.current_log = f"{t.tm_year}_{t.tm_mon:>02}_{t.tm_mday:>02}_{t.tm_hour:>02}_{t.tm_min:>02}_{t.tm_sec:>02}_latest"
-        self.current_path = f"{self.log_path}/{self.current_log}"
-        self.nn_vis_path = f"{self.current_path}/nn_vis"
-        self.image_path = f"{self.current_path}/images"
-        self.train_log = f"{self.current_path}/train_log.txt"
-        self.val_log = f"{self.current_path}/val_log.txt"
-        self.test_log = f"{self.current_path}/test_log.txt"
-        self.videos_path = f"{self.current_path}/videos"
+        self.current_path = Path(f"{self.log_path}/{self.current_log}")
+        self.nn_vis_path = Path(f"{self.current_path}/nn_vis")
+        self.image_path = Path(f"{self.current_path}/images")
+        self.train_log = Path(f"{self.current_path}/train_log.txt")
+        self.val_log = Path(f"{self.current_path}/val_log.txt")
+        self.test_log = Path(f"{self.current_path}/test_log.txt")
+        self.videos_path = Path(f"{self.current_path}/videos")
+        self.best_models_path = Path(f"{self.current_path}/models")
+        self.experiment_metadata = self.best_models_path.joinpath("metadata.json")
 
         # Create paths
         # Path(self.current_path).mkdir(parents=True, exist_ok=True)
@@ -156,45 +159,69 @@ class TrainLogger:
         Path(self.current_path).mkdir(parents=True, exist_ok=True)
         Path(self.image_path).mkdir(parents=True, exist_ok=True)
         Path(self.videos_path).mkdir(parents=True, exist_ok=True)
+        Path(self.best_models_path).mkdir(parents=True, exist_ok=True)
         self._init_files_()
         return self
-    
+
     def _init_files_(self):
-        with open(self.train_log,"w+") as tl:
-            cols = "timestamp,epoch,batch,loss,learning_rate"
-            tl.write(cols+os.linesep)
-        with open(self.val_log,"w+") as vl:
-            cols = "timestamp,epoch,batch,loss,learning_rate"
-            vl.write(cols+os.linesep)
-        
-    
-    def log_training(self,epoch,batch,loss,lr = ""):
+        with open(self.train_log, "w+") as tl:
+            cols = "timestamp,epoch,batch,loss,batch_acc,learning_rate"
+            tl.write(cols + os.linesep)
+        with open(self.val_log, "w+") as vl:
+            cols = "timestamp,epoch,batch,loss,batch_acc,learning_rate"
+            vl.write(cols + os.linesep)
+
+    def log_training(self, epoch, batch, loss, accuracy="", lr=""):
         t = time.localtime()
-        timestamp = f"{t.tm_year}_{t.tm_mon:>02}_{t.tm_mday:>02}_{t.tm_hour:>02}_{t.tm_min:>02}_{t.tm_sec:>02}"
+        # timestamp = f"{t.tm_year}_{t.tm_mon:>02}_{t.tm_mday:>02}_{t.tm_hour:>02}_{t.tm_min:>02}_{t.tm_sec:>02}"
+        timestamp = f"{time.time()}"
         with open(self.train_log, "a+") as myfile:
-            row = f"{timestamp},{epoch},{batch},{loss},{lr}"
-            myfile.write(row+os.linesep)
-    
-    def log_validation(self,epoch,batch,loss):
+            row = f"{timestamp},{epoch},{batch},{loss},{accuracy},{lr}"
+            myfile.write(row + os.linesep)
+
+    def log_validation(self, epoch, batch, loss, accuracy=""):
         t = time.localtime()
-        timestamp = f"{t.tm_year}_{t.tm_mon:>02}_{t.tm_mday:>02}_{t.tm_hour:>02}_{t.tm_min:>02}_{t.tm_sec:>02}"
+        # timestamp = f"{t.tm_year}_{t.tm_mon:>02}_{t.tm_mday:>02}_{t.tm_hour:>02}_{t.tm_min:>02}_{t.tm_sec:>02}"
+        timestamp = f"{time.time()}"
         with open(self.val_log, "a+") as myfile:
-            row = f"{timestamp},{epoch},{batch},{loss}"
-            myfile.write(row+os.linesep)
+            row = f"{timestamp},{epoch},{batch},{loss},{accuracy}"
+            myfile.write(row + os.linesep)
 
     def save_target_VS_output(self, target, output, filename, epoch, batch):
         image_name = f"{self.image_path}/{epoch}_{batch}_{filename}.png"
         img = output_target_heatmaps(target, output)
         print(f"Saving image: {image_name}")
         img.write_image(image_name)
-    
+
+    def save_model_state(self, model: torch.nn.Module, model_name):
+        torch.save(model.state_dict(), self.best_models_path.joinpath(f"{model_name}.pt"))
+
+    def save_experiment_metadata(self, **kwargs):
+        with open(self.experiment_metadata, "w") as file:
+            json.dump(kwargs, file)
+
     def remove_latest_tag(self):
         for d in os.listdir(self.log_path):
             if "_latest" in d:
                 old_dir = f"{self.log_path}/{d}"
-                new_dir = f"{self.log_path}/{d.replace('_latest','')}"
-                os.rename(old_dir,new_dir)
-    
+                new_dir = f"{self.log_path}/{d.replace('_latest', '')}"
+                os.rename(old_dir, new_dir)
+
+    def get_experiment_type(self):
+        if self.experiment_metadata.exists():
+            with open(self.experiment_metadata) as f:
+                try:
+                    metadata = json.loads(f.read())
+                    if "name" in metadata["model_metadata"]:
+                        return metadata["model_metadata"]["name"]
+                    else:
+                        return "No model name"
+                except json.decoder.JSONDecodeError:
+                    print("Metadata format broken")
+
+
+
+
     def get_experiments(self):
         ignore = {".DS_Store", "._.DS_Store"}
         logs = [f"{self.log_path}/{x}" for x in os.listdir(self.log_path) if x not in ignore]
@@ -202,15 +229,14 @@ class TrainLogger:
 
     def gen_filter_act_video(self):
         print("Generating filter activation video")
-    
+
     def gen_weight_distrbi_video(self):
-        print("Generating weight distribution video")        
-    
-    def generate_all_videos(self,log:str):
+        print("Generating weight distribution video")
+
+    def generate_all_videos(self, log: str):
         print(f"Generating all videeos for log: {log}")
         print(self.get_experiments())
-    
-    
+
     def _get_numerical_input_(selfs):
         seletion = input()
         while not seletion.isdigit():
@@ -218,10 +244,9 @@ class TrainLogger:
         seletion = int(seletion)
         return seletion
 
-    
-    def generrate_video_from_path(self,path:str,epoch_identifier:str):
+    def generrate_video_from_path(self, path: str, epoch_identifier: str):
 
-        #Generate videos path
+        # Generate videos path
         Path(self.videos_path).mkdir(parents=True, exist_ok=True)
 
         print(f"Generating video for image: {path}, epoch identifier: {epoch_identifier}")
@@ -234,28 +259,28 @@ class TrainLogger:
         dim = None
         scale = 0.25
         for e in epochs:
-            p = os.path.join(left,str(e),right)            
+            p = os.path.join(left, str(e), right)
             img = cv2.imread(p)
             width = int(img.shape[1] * scale)
             height = int(img.shape[0] * scale)
             dim = (width, height)
             img_array.append(cv2.resize(img, dim, interpolation=cv2.INTER_AREA))
-        
+
         file_name = f"{os.path.splitext(os.path.split(right)[1])[0]}.mp4"
-        video_base_path =os.path.join(self.videos_path,os.path.split(right)[0])
+        video_base_path = os.path.join(self.videos_path, os.path.split(right)[0])
         Path(video_base_path).mkdir(parents=True, exist_ok=True)
 
-        video_out_path = os.path.join(video_base_path,file_name)
+        video_out_path = os.path.join(video_base_path, file_name)
         out = cv2.VideoWriter(video_out_path, cv2.VideoWriter_fourcc(*'H264'), 8, dim)
 
         for i in range(len(img_array)):
             out.write(img_array[i])
         out.release()
 
-
     def __repr__(self):
         s = f"Logger object | Root: {self.current_path}"
         return s
+
 
 logger = TrainLogger(config.folder_structure_cfg.log_path)
 
@@ -264,10 +289,8 @@ if __name__ == "__main__":
     path = "/home/erikj/projects/insidrug/py_proj/erikj/loggs/2020_12_01_12_06_38/nn_vis/0/filter_viss/.T_cnn_1/weight_distributions.png"
 
     logger = TrainLogger(config_old.LOG_PATH, existing="2020_12_01_12_06_38")
-    
-    logger.generrate_video_from_path(path,"/0/")
-    
 
+    logger.generrate_video_from_path(path, "/0/")
 
     # a = "/home/erikj/projects/insidrug/py_proj/erikj/test_samples/mock_files/fileA.txt"
     # b = "/home/erikj/projects/insidrug/py_proj/erikj/test_samples/mock_files/fileB.txt"

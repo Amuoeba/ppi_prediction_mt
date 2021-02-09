@@ -10,6 +10,7 @@ from dash.dependencies import Input, Output
 from visualizations.dash_app.pages.experiment_results import ExperimentResults
 from visualizations.dash_app.pages.home import HomePage
 from visualizations.dash_app.pages.distogram_vis import DistogramVisualization
+from visualizations.dash_app.pages.aa_embedding_vis import EmbeddingVisPage
 from visualizations.dash_app.app import app
 # Typing imports
 from typing import TYPE_CHECKING
@@ -30,6 +31,8 @@ def display_page(pathname):
         return HomePage()
     elif pathname == "/distogram-visualization":
         return DistogramVisualization()
+    elif pathname == "/embedding-visualizations":
+        return EmbeddingVisPage()
     else:
         return ExperimentResults()
 

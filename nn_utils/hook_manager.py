@@ -7,6 +7,8 @@ from nn_utils.layer_vis import VisDispatcher
 import utils
 # Typing imports
 from typing import TYPE_CHECKING
+
+
 # if TYPE_CHECKING:
 
 
@@ -33,7 +35,7 @@ class HookManager:
 
     @staticmethod
     def hook_function(m, input, output, **kwargs):
-        print("-"*30)
+        print("-" * 30)
         print(f"PID: {os.getpid()}")
         print(
             f"Layer: {kwargs['layer_name']}, {m.__class__.__name__} | FORWARD")
@@ -41,7 +43,7 @@ class HookManager:
             f"Input size: {str(input[0].size()):^35}  |  min: {input[0].min():6.4f}  |  max: {input[0].max():6.4f}")
         print(
             f"output size:{str(output.data.size()):^35}  |  min: {output.data.min():6.4f}  |  max: {output.data.max():6.4f}")
-        print("-"*60)
+        print("-" * 60)
 
     def _register_hooks_(self, modules, parents=[]):
         if isinstance(modules, list):
@@ -76,7 +78,7 @@ class HookManager:
 class VisHookManager:
     def __init__(self, network, visualizer: VisDispatcher,
                  activation_vis_hookable=None,
-                 activation_histogram_hooks = None,
+                 activation_histogram_hooks=None,
                  filter_vis_hookable=None,
                  verbose=False):
         self.network = network
@@ -91,7 +93,7 @@ class VisHookManager:
 
         self.epoch = None
         self.batch_files = []
-    
+
     def set_run_metadata(self, epoch, batch_file_names):
         self.epoch = epoch
         self.batch_files = batch_file_names
@@ -110,7 +112,7 @@ class VisHookManager:
         activations = output.detach().clone().cpu().numpy()
 
         for b in range(activations.shape[0]):
-            sample_name = f"{batch_files[b].split('/')[-2].replace('.','_')}"
+            sample_name = f"{batch_files[b].split('/')[-2].replace('.', '_')}"
 
             save_path = f"{utils.logger.nn_vis_path}/{epoch}/{sample_name}/{layer}/"
             if not os.path.exists(save_path):
@@ -152,14 +154,14 @@ class VisHookManager:
                 print(f"Removing hook:{hook}")
             hook.remove()
         self.hooks = []
-    
+
     ###################################################################################################
     # Activation histogram hooks
     ###################################################################################################
 
     # TODO Continuue here
     @staticmethod
-    def activation_hist_vis_fun(m,input,output,**kwargs):
+    def activation_hist_vis_fun(m, input, output, **kwargs):
         layer = kwargs["layer_name"]
         visualizer = kwargs["visualizer"]
         epoch = kwargs["epoch"]
@@ -168,7 +170,7 @@ class VisHookManager:
         activations = output.detach().clone().cpu().numpy()
 
         for b in range(activations.shape[0]):
-            sample_name = f"{batch_files[b].split('/')[-2].replace('.','_')}"
+            sample_name = f"{batch_files[b].split('/')[-2].replace('.', '_')}"
 
             save_path = f"{utils.logger.nn_vis_path}/{epoch}/{sample_name}/{layer}/"
             if not os.path.exists(save_path):
@@ -177,7 +179,6 @@ class VisHookManager:
                 filt_activation = activations[b][filt]
                 visualizer.activations_vis_queue.put(
                     {"activation": filt_activation, "filename": f"{save_path}filt_histogram_{filt}.png"})
-
 
     def register_activation_histogram_hooks(self):
         self._register_activation_hooks_(self.activation_vis_hookable)
@@ -204,7 +205,7 @@ class VisHookManager:
                 aux_parents = parents.copy()
                 aux_parents.append(m)
                 self._register_activation_hooks_(modules[m], aux_parents)
-    
+
     ###################################################################################################
     # Filter vis hooks
     ###################################################################################################
@@ -229,10 +230,8 @@ class VisHookManager:
         #         visualizer.filters_vis_queue.put(
         #             {"filter": filters[x_next][x_prev], "save_path": f"{filter_save_path}prev_{x_next}_next_{x_prev}.png", "type": "image"})
 
-
     def register_filter_hooks(self):
         self._register_filter_hooks_(self.filter_vis_hookable)
-
 
     def _register_filter_hooks_(self, modules, parents=[]):
         if isinstance(modules, list):
@@ -263,8 +262,6 @@ class VisHookManager:
                 print(f"Removing hook:{hook}")
             hook.remove()
         self.hooks = []
-
-
 
 
 if __name__ == '__main__':

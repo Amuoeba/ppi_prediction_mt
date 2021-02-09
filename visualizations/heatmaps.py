@@ -7,7 +7,6 @@ from plotly.subplots import make_subplots
 import pandas as pd
 
 
-
 # Project specific imports
 
 # Imports from internal libraries
@@ -69,16 +68,22 @@ def output_target_heatmaps(target, output):
     return fig
 
 
-
-def train_val_figure(path):
+def train_val_figure(path, metric,moving_average=100,
+                     title="Default title",xaxis_title="Default x",
+                     yaxis_title="Default y",color="blue"):
     df = pd.read_csv(path)
-    a = 1
+    if not df.empty:
+        df = df.groupby([pd.cut(df.index, moving_average)], as_index=False).agg({metric: "mean"})
+    y = df[metric]  # .rolling(moving_average, min_periods=1).mean()
     fig = go.Figure()
     fig.add_trace(
-        go.Scatter(x=df["timestamp"],y=df["loss"])
+        go.Scatter(x=y.index.to_list(), y=y,line=dict(color=color, width=2))
     )
+    fig.update_layout(
+        title=title,
+        xaxis_title=xaxis_title,
+        yaxis_title=yaxis_title)
     return fig
-
 
 
 if __name__ == '__main__':
