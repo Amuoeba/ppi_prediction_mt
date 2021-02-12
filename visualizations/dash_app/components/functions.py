@@ -20,13 +20,13 @@ def get_experiments(exp_root):
 
 def get_model_types(exp_root):
     experiments = get_experiments(exp_root)
-    model_types = []
+    model_types = set()
     for e in experiments:
         e = Path(e)
         aux_loger = utils.TrainLogger(exp_root, e.name)
         t = aux_loger.get_experiment_type()
         if t:
-            model_types.append(t)
+            model_types.add(t)
     return model_types
 
 

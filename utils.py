@@ -2,6 +2,7 @@
 import hashlib
 import time
 import os
+import glob
 import json
 from pathlib import Path
 import re
@@ -126,7 +127,14 @@ def get_num_params(torch_module):
     return sum(p.numel() for p in torch_module.parameters() if p.requires_grad)
 
 
+def listdir_fullpath(path):
+    return [Path(path).joinpath(x) for x in os.listdir(path)]
+
+
 class TrainLogger:
+    # Constants
+    NO_MODEL_NAME = "No model name"
+
     def __init__(self, log_path, existing=None):
         super().__init__()
         self.log_path = log_path
@@ -137,14 +145,14 @@ class TrainLogger:
             self.current_log = existing
         else:
             self.current_log = f"{t.tm_year}_{t.tm_mon:>02}_{t.tm_mday:>02}_{t.tm_hour:>02}_{t.tm_min:>02}_{t.tm_sec:>02}_latest"
-        self.current_path = Path(f"{self.log_path}/{self.current_log}")
-        self.nn_vis_path = Path(f"{self.current_path}/nn_vis")
-        self.image_path = Path(f"{self.current_path}/images")
+        self.current_path = Path(f"{self.log_path}/{self.current_log}/")
+        self.nn_vis_path = Path(f"{self.current_path}/nn_vis/")
+        self.image_path = Path(f"{self.current_path}/images/")
         self.train_log = Path(f"{self.current_path}/train_log.txt")
         self.val_log = Path(f"{self.current_path}/val_log.txt")
         self.test_log = Path(f"{self.current_path}/test_log.txt")
-        self.videos_path = Path(f"{self.current_path}/videos")
-        self.best_models_path = Path(f"{self.current_path}/models")
+        self.videos_path = Path(f"{self.current_path}/videos/")
+        self.best_models_path = Path(f"{self.current_path}/models/")
         self.experiment_metadata = self.best_models_path.joinpath("metadata.json")
 
         # Create paths
@@ -212,15 +220,26 @@ class TrainLogger:
             with open(self.experiment_metadata) as f:
                 try:
                     metadata = json.loads(f.read())
-                    if "name" in metadata["model_metadata"]:
+                    try:
                         return metadata["model_metadata"]["name"]
-                    else:
-                        return "No model name"
+                    except KeyError:
+                        return self.NO_MODEL_NAME
                 except json.decoder.JSONDecodeError:
-                    print("Metadata format broken")
 
+                    return self.NO_MODEL_NAME
+        return self.NO_MODEL_NAME
 
+    def get_experiment_metadata(self):
+        if self.experiment_metadata.exists():
+            with open(self.experiment_metadata) as f:
+                try:
+                    # metadata = json.loads(f.read())
+                    return f.read()
+                except json.decoder.JSONDecodeError:
+                    return "metadata broken"
 
+    def get_model_states(self):
+        return [Path(x) for x in glob.glob(f"{self.best_models_path}/*.pt")]
 
     def get_experiments(self):
         ignore = {".DS_Store", "._.DS_Store"}

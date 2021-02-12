@@ -259,9 +259,10 @@ class CBOA_Dataset(Dataset):
 class NGramLanguageModeler(nn.Module):
     model_name = "Base embedder"
 
-    def __init__(self, vocab_size, embedding_dim, context_size):
+    def __init__(self, vocab_size, embedding_dim, context_size, **kwargs):
         super(NGramLanguageModeler, self).__init__()
         self.metadata = None
+        # TODO Change metadata to be a dataclass. Easyer loading of model parameter
         self.generate_metadata(locals(), inspect.signature(self.__init__))
         self.embeddings = nn.Embedding(vocab_size, embedding_dim)
         self.linear1 = nn.Linear(context_size * embedding_dim, 128)

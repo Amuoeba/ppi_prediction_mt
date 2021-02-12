@@ -7,9 +7,9 @@ import dash_bootstrap_components as dbc
 
 # Typing imports
 from typing import TYPE_CHECKING
-# if TYPE_CHECKING:
-    
 
+
+# if TYPE_CHECKING:
 
 
 def Navbar():
@@ -35,7 +35,6 @@ def Navbar():
         sticky="top"
     )
     return navbar
-
 
 
 if __name__ == '__main__':
