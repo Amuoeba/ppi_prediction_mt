@@ -1,6 +1,8 @@
 # General imports
 import os
 import torch
+import dataclasses as dc
+import dacite
 
 # Project specific imports
 
@@ -36,6 +38,16 @@ class MetaFloat(float):
     def __init__(self, value, name=None):
         float.__init__(value)
         self.name = name
+
+
+@dc.dataclass
+class BaseMetaParam:
+    def get_dict(self):
+        try:
+            meta_dict = dc.asdict(self)
+        except TypeError:
+            meta_dict = None
+        return meta_dict
 
 
 if __name__ == '__main__':

@@ -221,7 +221,7 @@ class TrainLogger:
                 try:
                     metadata = json.loads(f.read())
                     try:
-                        return metadata["model_metadata"]["name"]
+                        return metadata["model_params"]["model_name"]
                     except KeyError:
                         return self.NO_MODEL_NAME
                 except json.decoder.JSONDecodeError:

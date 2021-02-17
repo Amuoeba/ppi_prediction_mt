@@ -8,9 +8,8 @@ import dash_bootstrap_components as dbc
 
 # Typing imports
 from typing import TYPE_CHECKING
-# if TYPE_CHECKING:
-    
 
+# if TYPE_CHECKING:
 
 
 app = dash.Dash()
@@ -22,7 +21,6 @@ app.css.append_css({
 })
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.UNITED])
-
 
 if __name__ == '__main__':
     print(f'Running {__file__}')

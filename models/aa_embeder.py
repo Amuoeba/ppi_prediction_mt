@@ -1,7 +1,13 @@
+from __future__ import annotations
 # General imports
 import os
 import sys
 import time
+import data
+import dataclasses as dc
+import dacite
+
+import dacite
 import inspect
 import itertools
 import pickle
@@ -23,7 +29,7 @@ import hashlib
 import config
 import utils
 from mol_readers.pdbind import PDBindDataset, PandasMolStructure
-from nn_utils.utils import select_device, MetaInt, MetaFloat
+from nn_utils.utils import select_device, MetaInt, MetaFloat, BaseMetaParam
 import feature_constructors.categorical as catFeatures
 
 # Typing imports
@@ -256,12 +262,39 @@ class CBOA_Dataset(Dataset):
         return target, context
 
 
+@dc.dataclass
+class MetaParams(BaseMetaParam):
+    model_params: ModelParams
+    optimizer_params: OptimizerParams
+    dataset_params: DatasetParams
+
+
+@dc.dataclass
+class OptimizerParams(BaseMetaParam):
+    learning_rate: float
+
+
+@dc.dataclass
+class DatasetParams(BaseMetaParam):
+    context_size: int
+    batch_size: int
+    ntuple_size: int
+
+
+@dc.dataclass
+class ModelParams(BaseMetaParam):
+    model_name: str
+    vocab_size: int
+    embedding_dim: int
+    context_size: int
+
+
 class NGramLanguageModeler(nn.Module):
     model_name = "Base embedder"
 
     def __init__(self, vocab_size, embedding_dim, context_size, **kwargs):
         super(NGramLanguageModeler, self).__init__()
-        self.metadata = None
+        self.metadata: MetaParams = None
         # TODO Change metadata to be a dataclass. Easyer loading of model parameter
         self.generate_metadata(locals(), inspect.signature(self.__init__))
         self.embeddings = nn.Embedding(vocab_size, embedding_dim)
@@ -272,8 +305,8 @@ class NGramLanguageModeler(nn.Module):
         for k in list(local_scope.keys()):
             if k not in init_atributes.parameters.keys():
                 del local_scope[k]
-        local_scope["name"] = self.model_name
-        self.metadata = local_scope
+        local_scope["model_name"] = self.model_name
+        self.metadata = dacite.from_dict(ModelParams, local_scope)
         return self
 
     def forward(self, inputs):
@@ -292,37 +325,53 @@ if __name__ == '__main__':
     print(f"Selected device: {NN_DEVICE}")
     utils.logger.init()
 
-    CONTEXT_SIZE = MetaInt(8, "CONTEXT_SIZE")
-    NTUPLE_SIZE = MetaInt(2, "NTUPLE_SIZE")
-    EMBEDING_DIM = MetaInt(8, "EMBEDING_DIM")
+    dataset_params = DatasetParams(batch_size=64,
+                                   ntuple_size=2,
+                                   context_size=8)
+    optimizer_params = OptimizerParams(learning_rate=0.001)
 
-    BATCH_SIZE = MetaInt(64, "BATCH_SIZE")
-    LEARNING_RATE = MetaFloat(0.001, "LEARNING_RATE")
+    # CONTEXT_SIZE = MetaInt(8, "CONTEXT_SIZE")
+    # NTUPLE_SIZE = MetaInt(2, "NTUPLE_SIZE")
+    # EMBEDING_DIM = MetaInt(8, "EMBEDING_DIM")
+    #
+    # BATCH_SIZE = MetaInt(64, "BATCH_SIZE")
+    # LEARNING_RATE = MetaFloat(0.001, "LEARNING_RATE")
 
     N_EPOCHS = 50
 
     NUM_WORKERS = 0
     TRAIN_TEST_VAL_SPLIT = {"train": 0.8, "test": 0.1, "val": 0.1}
 
-    train_dataset = CBOA_Dataset(context_size=CONTEXT_SIZE, ntuple_size=NTUPLE_SIZE, set_type="train",
+    train_dataset = CBOA_Dataset(context_size=dataset_params.context_size, ntuple_size=dataset_params.ntuple_size,
+                                 set_type="train",
                                  split=TRAIN_TEST_VAL_SPLIT, split_variant=0, init_on_GPU=False)
-    validation_dataset = CBOA_Dataset(context_size=CONTEXT_SIZE, ntuple_size=NTUPLE_SIZE, set_type="val",
+    validation_dataset = CBOA_Dataset(context_size=dataset_params.context_size, ntuple_size=dataset_params.ntuple_size,
+                                      set_type="val",
                                       split=TRAIN_TEST_VAL_SPLIT, split_variant=0, init_on_GPU=False)
-    test_dataset = CBOA_Dataset(context_size=CONTEXT_SIZE, ntuple_size=NTUPLE_SIZE, set_type="test",
+    test_dataset = CBOA_Dataset(context_size=dataset_params.context_size, ntuple_size=dataset_params.ntuple_size,
+                                set_type="test",
                                 split=TRAIN_TEST_VAL_SPLIT, split_variant=0, init_on_GPU=False)
 
-    train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=NUM_WORKERS,
+    train_loader = DataLoader(train_dataset, batch_size=dataset_params.batch_size, shuffle=True,
+                              num_workers=NUM_WORKERS,
                               drop_last=True,
                               pin_memory=True)
-    val_loader = DataLoader(validation_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=NUM_WORKERS,
+    val_loader = DataLoader(validation_dataset, batch_size=dataset_params.batch_size, shuffle=True,
+                            num_workers=NUM_WORKERS,
                             drop_last=True,
                             pin_memory=True)
-    test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=NUM_WORKERS, drop_last=True,
+    test_loader = DataLoader(test_dataset, batch_size=dataset_params.batch_size, shuffle=True, num_workers=NUM_WORKERS,
+                             drop_last=True,
                              pin_memory=True)
 
     loss_function = nn.NLLLoss()
-    model = NGramLanguageModeler(train_dataset.vocab_size, EMBEDING_DIM, train_dataset.context_size * 2).to(NN_DEVICE)
-    optimizer = optim.SGD(model.parameters(), lr=LEARNING_RATE)
+
+    model_params = ModelParams(model_name=NGramLanguageModeler.model_name,
+                               vocab_size=train_dataset.vocab_size,
+                               embedding_dim=8,
+                               context_size=train_dataset.context_size * 2)
+    model = NGramLanguageModeler(**dc.asdict(model_params)).to(NN_DEVICE)
+    optimizer = optim.SGD(model.parameters(), lr=optimizer_params.learning_rate)
 
     best_model_val_acc = -1
 
@@ -331,10 +380,10 @@ if __name__ == '__main__':
     # for x in debug_artefacts:
     #     if x in model.metadata:
     #         del model.metadata[x]
-    utils.logger.save_experiment_metadata(model_metadata=model.metadata,
-                                          optimizer_metadata={LEARNING_RATE.name: LEARNING_RATE},
-                                          dataset_metadata={BATCH_SIZE.name: BATCH_SIZE,
-                                                            NTUPLE_SIZE.name: NTUPLE_SIZE})
+    all_params = MetaParams(model_params=model_params,
+                            dataset_params=dataset_params,
+                            optimizer_params=optimizer_params)
+    utils.logger.save_experiment_metadata(**dc.asdict(all_params))
 
     with utils.Timer("Training loop"):
         for epoch in range(N_EPOCHS):

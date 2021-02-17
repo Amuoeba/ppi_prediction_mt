@@ -1,5 +1,7 @@
 # General imports
 import os
+import dacite
+import dataclasses as dc
 from itertools import product
 from pathlib import Path
 from functools import partial
@@ -24,7 +26,7 @@ import utils
 import config
 
 from models import aa_embeder
-from models.aa_embeder import AA_OneHotEncoder
+
 
 # Typing imports
 from typing import TYPE_CHECKING
@@ -38,6 +40,58 @@ def path_to_dropdown_option(p, full_path=False):
     else:
         dropdown_option = {"label": f"{p.name}", "value": f"{p.name}"}
     return dropdown_option
+
+
+def generate_embeding_plot_data(model_state, selected_experiment,):
+    # TODO Separate graph generation and graph data initialization
+    # TODO Use @dataclass to load 
+
+    # Init loger and encoder
+    aux_loger = utils.TrainLogger(config.folder_structure_cfg.log_path, selected_experiment)
+    metadata = json.loads(aux_loger.get_experiment_metadata())
+    metadata = dacite.from_dict(aa_embeder.MetaParams,metadata)
+    # Metadata variables
+    vocab_size = metadata["model_metadata"]["vocab_size"]
+
+    print(metadata)
+    encoder = aa_embeder.AA_OneHotEncoder(metadata["dataset_metadata"]["NTUPLE_SIZE"])
+
+    # Init embeder model
+    model = aa_embeder.NGramLanguageModeler(**metadata["model_metadata"])
+    model.load_state_dict(torch.load(model_state, map_location=torch.device('cpu')))
+    model.eval()
+
+    # Generate embedings
+    decoded = encoder.decode([x for x in range(vocab_size)], mode="df")
+
+    lookup = torch.tensor([x for x in range(vocab_size)], dtype=torch.long)
+    embeddings = model.embeddings(lookup)
+    embeddings = embeddings.detach().numpy()
+
+    tsne_transformed = TSNE(n_components=2).fit_transform(embeddings)
+
+    aa_df = pd.read_csv("/home/erik/Projects/master_thesis/ppi_prediction_mt/data/aminoacids.csv")
+
+    dropcolumns = ["FullName", "ISO1"]
+    decoded_with_meta = pd.merge(left=decoded, right=aa_df, left_on="aa_0", right_on="ISO3", how="left")
+    decoded_with_meta = pd.merge(left=decoded_with_meta,
+                                 right=aa_df[["ISO3", "molecular_weight", "type", "aromatic"]],
+                                 left_on="aa_1", right_on="ISO3", how="left", suffixes=["_0", "_1"])
+    decoded_with_meta.drop(columns=dropcolumns, inplace=True)
+
+    features = decoded_with_meta["type_0"].unique()
+    rows = list(zip(features, ["#fcba03", "#fc0303", "#1e8255", "#036bfc", "#b82abf"]))
+    colormap_df = pd.DataFrame(rows, columns=["feature", "color"])
+
+    aromatic_color_map = pd.DataFrame([[0, "#f24500"], [1, "#008549"]], columns=["feature", "color"])
+
+    plot_df = pd.merge(left=decoded_with_meta, right=colormap_df, left_on="type_0", right_on="feature", how="left")
+
+    decoded_with_meta["enc_0"], decoded_with_meta["enc_1"] = tsne_transformed[:, 0], tsne_transformed[:, 1]
+
+
+def graph_embeddings_based_on_type():
+    a = 1
 
 
 def EmbeddingVisPage():
@@ -118,12 +172,15 @@ def select_expperiment(experiment):
               [Input("model-states", "value")],
               [State("EMB_experiment-dropdown", "value")])
 def select_model_state(model_state, selected_experiment):
+    print(f"Model state: {model_state}")
+    print(f"Selected experiment: {selected_experiment}")
     aux_loger = utils.TrainLogger(config.folder_structure_cfg.log_path, selected_experiment)
     metadata = json.loads(aux_loger.get_experiment_metadata())
-    print(metadata)
-    encoder = AA_OneHotEncoder(metadata["dataset_metadata"]["NTUPLE_SIZE"])
+    metadata = dacite.from_dict(aa_embeder.MetaParams,metadata)
 
-    model = aa_embeder.NGramLanguageModeler(**metadata["model_metadata"])
+    encoder = aa_embeder.AA_OneHotEncoder(metadata.dataset_params.ntuple_size)
+
+    model = aa_embeder.NGramLanguageModeler(**dc.asdict(metadata.model_params))
     model.load_state_dict(torch.load(model_state, map_location=torch.device('cpu')))
     model.eval()
 
@@ -181,4 +238,7 @@ if __name__ == '__main__':
     print(f"Script dir:  {os.path.dirname(os.path.abspath(__file__))}")
     print(f"Working dir: {os.path.abspath(os.getcwd())}")
 
-    print(app_f.get_experiments(config.folder_structure_cfg.log_path))
+    model_state = "/home/erik/Projects/master_thesis/data/logs/2021_02_17_03_02_59_latest/models/aa_embedder.pt"
+    selected_experiment = "2021_02_17_03_02_59_latest"
+    generate_embeding_plot_data(model_state,selected_experiment)
+
