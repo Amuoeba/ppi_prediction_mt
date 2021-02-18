@@ -330,13 +330,6 @@ if __name__ == '__main__':
                                    context_size=8)
     optimizer_params = OptimizerParams(learning_rate=0.001)
 
-    # CONTEXT_SIZE = MetaInt(8, "CONTEXT_SIZE")
-    # NTUPLE_SIZE = MetaInt(2, "NTUPLE_SIZE")
-    # EMBEDING_DIM = MetaInt(8, "EMBEDING_DIM")
-    #
-    # BATCH_SIZE = MetaInt(64, "BATCH_SIZE")
-    # LEARNING_RATE = MetaFloat(0.001, "LEARNING_RATE")
-
     N_EPOCHS = 50
 
     NUM_WORKERS = 0
@@ -375,11 +368,6 @@ if __name__ == '__main__':
 
     best_model_val_acc = -1
 
-    # Remove debug artefacts when debugging, so that logger doesent fail
-    # debug_artefacts = ["self", "__class__"]
-    # for x in debug_artefacts:
-    #     if x in model.metadata:
-    #         del model.metadata[x]
     all_params = MetaParams(model_params=model_params,
                             dataset_params=dataset_params,
                             optimizer_params=optimizer_params)
