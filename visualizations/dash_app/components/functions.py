@@ -1,6 +1,8 @@
 # General imports
 import os
 from pathlib import Path
+import dash
+import json
 # Project specific imports
 
 # Imports from internal libraries
@@ -28,6 +30,17 @@ def get_model_types(exp_root):
         if t:
             model_types.add(t)
     return model_types
+
+
+def get_trigered_id(ctx: dash._callback_context.CallbackContext):
+    button = ctx.triggered[0]["prop_id"].split(".")[0]
+    try:
+        button = json.loads(button)
+        button_id = button["type"]
+    except json.decoder.JSONDecodeError:
+        button_id = button
+    # print(button_id,f"type: {type(button_id)}")
+    return button_id
 
 
 if __name__ == '__main__':

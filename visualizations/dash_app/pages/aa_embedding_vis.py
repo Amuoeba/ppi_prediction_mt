@@ -13,7 +13,8 @@ import plotly.graph_objects as go
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
-from dash.dependencies import Input, Output, State
+from dash.dependencies import Input, Output, State, MATCH, ALL
+import dash
 import json
 import flask
 # Project specific imports
@@ -31,12 +32,20 @@ from models import aa_embeder
 # Typing imports
 from typing import TYPE_CHECKING
 
+
 # if TYPE_CHECKING:
 
 
 # State variables
+@dc.dataclass
+class PageState:
+    plot_df_computed: bool = False
+    plot_df: pd.DataFrame = pd.DataFrame()
+    present_elements = []
 
-COLOR_BY = "all"
+
+
+page_state = PageState()
 
 
 def path_to_dropdown_option(p, full_path=False):
@@ -48,65 +57,60 @@ def path_to_dropdown_option(p, full_path=False):
     return dropdown_option
 
 
-def generate_embeding_plot_data(model_state, selected_experiment, ):
-    # Init loger and encoder
-    aux_loger = utils.TrainLogger(config.folder_structure_cfg.log_path, selected_experiment)
-    metadata = json.loads(aux_loger.get_experiment_metadata())
-    metadata = dacite.from_dict(aa_embeder.MetaParams, metadata)
-    # Metadata variables
-    vocab_size = metadata.model_params.vocab_size
+def generate_embeding_plot_data(model_state, selected_experiment):
+    if not page_state.plot_df_computed:
+        print("Computing plot data")
+        # Init loger and encoder
+        aux_loger = utils.TrainLogger(config.folder_structure_cfg.log_path, selected_experiment)
+        metadata = json.loads(aux_loger.get_experiment_metadata())
+        metadata = dacite.from_dict(aa_embeder.MetaParams, metadata)
+        # Metadata variables
+        vocab_size = metadata.model_params.vocab_size
 
-    print(metadata)
-    encoder = aa_embeder.AA_OneHotEncoder(metadata.dataset_params.ntuple_size)
+        print(metadata)
+        encoder = aa_embeder.AA_OneHotEncoder(metadata.dataset_params.ntuple_size)
 
-    # Init embeder model
-    model = aa_embeder.NGramLanguageModeler(**dc.asdict(metadata.model_params))
-    model.load_state_dict(torch.load(model_state, map_location=torch.device('cpu')))
-    model.eval()
+        # Init embeder model
+        model = aa_embeder.NGramLanguageModeler(**dc.asdict(metadata.model_params))
+        model.load_state_dict(torch.load(model_state, map_location=torch.device('cpu')))
+        model.eval()
 
-    # Generate embedings
-    decoded = encoder.decode([x for x in range(vocab_size)], mode="df")
+        # Generate embedings
+        decoded = encoder.decode([x for x in range(vocab_size)], mode="df")
 
-    lookup = torch.tensor([x for x in range(vocab_size)], dtype=torch.long)
-    embeddings = model.embeddings(lookup)
-    embeddings = embeddings.detach().numpy()
+        lookup = torch.tensor([x for x in range(vocab_size)], dtype=torch.long)
+        embeddings = model.embeddings(lookup)
+        embeddings = embeddings.detach().numpy()
 
-    tsne_transformed = TSNE(n_components=2).fit_transform(embeddings)
+        tsne_transformed = TSNE(n_components=2).fit_transform(embeddings)
 
-    aa_df = pd.read_csv("/home/erik/Projects/master_thesis/ppi_prediction_mt/data/aminoacids.csv")
+        aa_df = pd.read_csv("/home/erik/Projects/master_thesis/ppi_prediction_mt/data/aminoacids.csv")
 
-    dropcolumns = ["FullName", "ISO1"]
-    decoded_with_meta = pd.merge(left=decoded, right=aa_df, left_on="aa_0", right_on="ISO3", how="left")
-    decoded_with_meta = pd.merge(left=decoded_with_meta,
-                                 right=aa_df[["ISO3", "molecular_weight", "type", "aromatic"]],
-                                 left_on="aa_1", right_on="ISO3", how="left", suffixes=["_0", "_1"])
-    decoded_with_meta.drop(columns=dropcolumns, inplace=True)
+        dropcolumns = ["FullName", "ISO1"]
+        decoded_with_meta = pd.merge(left=decoded, right=aa_df, left_on="aa_0", right_on="ISO3", how="left")
+        decoded_with_meta = pd.merge(left=decoded_with_meta,
+                                     right=aa_df[["ISO3", "molecular_weight", "type", "aromatic"]],
+                                     left_on="aa_1", right_on="ISO3", how="left", suffixes=["_0", "_1"])
+        decoded_with_meta.drop(columns=dropcolumns, inplace=True)
 
-    decoded_with_meta["enc_0"], decoded_with_meta["enc_1"] = tsne_transformed[:, 0], tsne_transformed[:, 1]
+        decoded_with_meta["enc_0"], decoded_with_meta["enc_1"] = tsne_transformed[:, 0], tsne_transformed[:, 1]
+        page_state.plot_df = decoded_with_meta.copy(deep=True)
+        page_state.plot_df_computed = True
+    else:
+        print("Loading plot data from cache")
+        decoded_with_meta = page_state.plot_df.copy(deep=True)
+
     return decoded_with_meta
 
 
-def generate_embedding_graph(plotdf: pd.DataFrame, mode, color_by=all):
-    n_aas = len(plotdf.filter(regex="aa.*").columns)
-    colorings = list(range(n_aas)) + "all"
-    modes = ["aa_type", "aa_aromatic"]
-    assert color_by in colorings, f"color_by must be one of hte following{colorings}." \
-                                  f"This represents how many subsequent amionacids are used to generate embeddings"
-    assert mode in modes, f"mode must be one of the folllowing: {modes}"
-
-    # Custom color maps
-    features = plotdf["type_0"].unique()
-    rows = list(zip(features, ["#fcba03", "#fc0303", "#1e8255", "#036bfc", "#b82abf"]))
-    colormap_df = pd.DataFrame(rows, columns=["feature", "color"])
-    aromatic_color_map = pd.DataFrame([[0, "#f24500"], [1, "#008549"]], columns=["feature", "color"])
-
-    plot_df = pd.merge(left=plotdf, right=colormap_df, left_on="type_0", right_on="feature", how="left")
+# def plot_data_to_dataframe(model_state, selected_experiment):
+#     return pd.read_json(generate_embeding_plot_data(model_state, selected_experiment))
 
 
 def aa_type_graph(data: pd.DataFrame, color_by):
     n_aas = len(data.filter(regex="aa.*").columns)
     colorings = list(range(n_aas)) + ["all"]
-    assert color_by in colorings, f"color_by must be one of hte following{colorings}." \
+    assert color_by in colorings, f"color_by must be one of hte following{colorings} not {color_by}." \
                                   f"This represents how many subsequent amionacids are used to generate embeddings"
 
     # Generate features
@@ -144,6 +148,10 @@ def aa_type_graph(data: pd.DataFrame, color_by):
 
         return filtered_data
 
+    if type(color_by) == int:
+        title = f"Embeddings colored by {color_by}th aminoacid type in tuple"
+    else:
+        title = "Embeddings colored by all aminoacid types in tuple"
     fig = go.Figure()
     for f in features:
         filtered_encodings = filter_encodings_by_features(f)
@@ -153,10 +161,84 @@ def aa_type_graph(data: pd.DataFrame, color_by):
             marker=generate_markers(f),
             mode="markers",
             showlegend=True,
-            name=str(f)
+            name=str(f),
+
         ))
 
     fig.update_layout(
+        title=title,
+        xaxis_title="Emb dim 1",
+        yaxis_title="Emb dim 2",
+        width=1200,
+        height=800
+    )
+
+    return dcc.Graph(figure=fig), colorings
+
+
+def aa_aromatic_graph(data: pd.DataFrame, color_by):
+    n_aas = len(data.filter(regex="aa.*").columns)
+    colorings = list(range(n_aas)) + ["all"]
+    assert color_by in colorings, f"color_by must be one of hte following{colorings} not {color_by}." \
+                                  f"This represents how many subsequent amionacids are used to generate embeddings"
+
+    # Generate features
+    if color_by == "all":
+        features = np.array([])
+        for i in range(n_aas):
+            features = np.concatenate((features, data[f"aromatic_{i}"].unique()), 0)
+        features = np.unique(features)
+        features = list(product(features, repeat=n_aas))
+    else:
+        features = data[f"aromatic_{color_by}"].unique()
+
+    # Generate markers
+    def generate_markers(feature):
+        if color_by != "all":
+            # rows = list(zip(features, ["#fcba03", "#fc0303", "#1e8255", "#036bfc", "#b82abf"][:len(features)]))
+            # colormap_df = pd.DataFrame(rows, columns=["feature", "color"])
+            aromatic_color_map = pd.DataFrame([[0, "#f24500"], [1, "#008549"]], columns=["feature", "color"])
+            markers = dict(color=aromatic_color_map[aromatic_color_map.feature == feature]["color"].values[0])
+            return markers
+        else:
+            return None
+
+    # Generate filtered encodings
+    def filter_encodings_by_features(feature):
+        if color_by == "all":
+            mask = None
+            for i, f in enumerate(feature):
+                if mask is None:
+                    mask = data[f"aromatic_{i}"] == feature[i]
+                else:
+                    mask = mask & (data[f"aromatic_{i}"] == feature[i])
+            filtered_data = data[mask]
+        else:
+            filtered_data = data[(data[f"aromatic_{color_by}"] == feature)]
+
+        return filtered_data
+
+    if type(color_by) == int:
+        title = f"Embeddings colored by {color_by}th aminoacid aromaticity in tuple"
+    else:
+        title = "Embeddings colored by all aminoacid aromaticity in tuple"
+    fig = go.Figure()
+    for f in features:
+        filtered_encodings = filter_encodings_by_features(f)
+        fig.add_trace(go.Scatter(
+            x=filtered_encodings["enc_0"],
+            y=filtered_encodings["enc_1"],
+            marker=generate_markers(f),
+            mode="markers",
+            showlegend=True,
+            name=str(f),
+
+        ))
+
+    fig.update_layout(
+        title=title,
+        xaxis_title="Emb dim 1",
+        yaxis_title="Emb dim 2",
         width=1200,
         height=800
     )
@@ -165,6 +247,7 @@ def aa_type_graph(data: pd.DataFrame, color_by):
 
 
 def EmbeddingVisPage():
+
     layout = html.Div([
         Navbar(),
         "This is embedding vis page",
@@ -203,10 +286,11 @@ def EmbeddingVisPage():
             style={"padding": 50}
         ),
         html.Div(id="metadata", style={"padding": 50}),
-        html.Div(id="graph-options"),
-        html.Div(id="embedding-grapphs", style={"padding": 50})
+        html.Div(id="graph-options", style={"padding": 50}),
+        html.Div(id="embedding-grapphs", style={"padding": 50}),
 
     ])
+
     return layout
 
 
@@ -239,23 +323,52 @@ def select_expperiment(experiment):
     return Metadata(metadata, aux_loger.current_path), model_states
 
 
-# TODO figure out how to create callback on dinamically created elements
-@app.callback([Output("embedding-grapphs", "children"),
-               Output("graph-options", "children")],
-              [Input("model-states", "value")],
-              [State("EMB_experiment-dropdown", "value")])
-def select_model_state(model_state, selected_experiment):
+@app.callback(Output("embedding-grapphs", "children"),
+              Output("graph-options", "children"),
+              Input("model-states", "value"),
+              Input({"type": "aa-graph-options", "index": ALL}, "value"),
+              Input({"type": "reset", "index": ALL}, "n_clicks"),
+              State("EMB_experiment-dropdown", "value"), prevent_initial_call=True)
+def select_model_state(model_state, color_by, recompute, selected_experiment):
     print(f"Model state: {model_state}")
     print(f"Selected experiment: {selected_experiment}")
+    print(f"Graph type {color_by},{type(color_by)}")
+    print(f"Recompute: {recompute}")
+
+    ctx = dash.callback_context
+    triggered_id = app_f.get_trigered_id(ctx)
+    if triggered_id == "reset":
+        page_state.present_elements = []
+        page_state.plot_df_computed = False
 
     plot_df = generate_embeding_plot_data(model_state, selected_experiment)
+    print(f"Plot df shape: {plot_df.shape}, Page state df shape: {page_state.plot_df.shape}")
 
-    graph, colorings = aa_type_graph(plot_df, 0)
+    try:
+        color_by = int(color_by[0])
+    except (ValueError, TypeError):
+        color_by = color_by[0]
+    except IndexError:
+        color_by = "all"
+    if color_by is None:
+        color_by = "all"
+    type_graph, colorings = aa_type_graph(plot_df, color_by)
+    aromatic_graph, _ = aa_aromatic_graph(plot_df, color_by)
 
     options = [{"label": f"{c}", "value": f"{c}"} for c in colorings]
-    options = dcc.Dropdown(id="aa_graph_options", options=options)
 
-    return graph, options
+    options = dcc.Dropdown(id={"type": "aa-graph-options", "index": 0}, options=options)
+    reset_button = html.Button(id={"type": "reset", "index": 0}, children="Recompute")
+    graph_controlls = dbc.Row([
+        dbc.Col([options]),
+        dbc.Col([reset_button])
+    ])
+
+    if "aa-graph-options" in page_state.present_elements:
+        return [type_graph, aromatic_graph], dash.no_update
+    else:
+        page_state.present_elements.append("aa-graph-options")
+        return [type_graph, aromatic_graph], graph_controlls
 
 
 if __name__ == '__main__':
@@ -263,8 +376,9 @@ if __name__ == '__main__':
     print(f"Script dir:  {os.path.dirname(os.path.abspath(__file__))}")
     print(f"Working dir: {os.path.abspath(os.getcwd())}")
 
-    model_state = "/home/erik/Projects/master_thesis/data/logs/2021_02_17_03_02_59_latest/models/aa_embedder.pt"
-    selected_experiment = "2021_02_17_03_02_59_latest"
+    model_state = "/home/erik/Projects/master_thesis/data/logs/2021_02_20_17_40_24_latest/models/aa_embedder.pt"
+    selected_experiment = "2021_02_20_17_40_24_latest"
     plot_data = generate_embeding_plot_data(model_state, selected_experiment)
 
     aa_type_graph(plot_data, "all")
+    aa_aromatic_graph(plot_data, "all")

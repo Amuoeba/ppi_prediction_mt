@@ -330,7 +330,7 @@ if __name__ == '__main__':
                                    context_size=8)
     optimizer_params = OptimizerParams(learning_rate=0.001)
 
-    N_EPOCHS = 50
+    N_EPOCHS = 200
 
     NUM_WORKERS = 0
     TRAIN_TEST_VAL_SPLIT = {"train": 0.8, "test": 0.1, "val": 0.1}
@@ -361,7 +361,7 @@ if __name__ == '__main__':
 
     model_params = ModelParams(model_name=NGramLanguageModeler.model_name,
                                vocab_size=train_dataset.vocab_size,
-                               embedding_dim=8,
+                               embedding_dim=2,
                                context_size=train_dataset.context_size * 2)
     model = NGramLanguageModeler(**dc.asdict(model_params)).to(NN_DEVICE)
     optimizer = optim.SGD(model.parameters(), lr=optimizer_params.learning_rate)

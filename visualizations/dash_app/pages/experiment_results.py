@@ -70,25 +70,35 @@ def ExperimentResults():
             n_intervals=0
         ),
         html.H3("Filter weight distributions"),
-        html.P("Select experiment"),
-        dcc.Dropdown(id="experiment-dropdown",
-                     options=[{"label": f"{x[1]}", "value": f"{x[1]}"}
-                              for x in list(map(lambda x: os.path.split(x), logs))]
-                     ),
-        html.P("Select layer for filter distribution visualization:"),
-        dcc.Dropdown(
-            id="filter-vis-layers",
-            options=[],
-            value=[]
-        ),
-        dcc.Slider(
-            id='epoch-slider',
-            min=0,
-            max=0,
-            step=1,
-            value=0,
-            updatemode="drag"
-        ),
+        html.Div([
+            html.P("Select experiment"),
+            dcc.Dropdown(id="experiment-dropdown",
+                         options=[{"label": f"{x[1]}", "value": f"{x[1]}"}
+                                  for x in list(map(lambda x: os.path.split(x), logs))]
+                         )
+        ], style={"width": "20%"}),
+
+
+        dbc.Row([
+            dbc.Col([
+                html.P("Select layer for filter distribution visualization:"),
+                dcc.Dropdown(
+                    id="filter-vis-layers",
+                    options=[],
+                    value=[])
+            ]),
+            dbc.Col([
+                html.P("Epoch slider"),
+                dcc.Slider(
+                    id='epoch-slider',
+                    min=0,
+                    max=0,
+                    step=1,
+                    value=0,
+                    updatemode="drag"
+                )
+            ])
+        ]),
         html.Img(id='filter-distribution-image',
                  style={'height': '500px', 'width': '500px'}),
         html.H3("Activations"),
@@ -120,10 +130,15 @@ def ExperimentResults():
             value=100,
             updatemode="drag"
         ),
-        html.Div(id="train-graph"),
-        html.Div(id="train-accuracy-graph"),
-        html.Div(id="val-graph"),
-        html.Div(id="val-accuracy-graph"),
+
+        dbc.Row(
+            [dbc.Col(html.Div(id="train-graph")),
+             dbc.Col(html.Div(id="train-accuracy-graph"))]
+        ),
+        dbc.Row(
+            [dbc.Col(html.Div(id="val-graph")),
+             dbc.Col(html.Div(id="val-accuracy-graph"))]
+        )
 
     ])
     return layout

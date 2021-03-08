@@ -82,7 +82,10 @@ def train_val_figure(path, metric,moving_average=100,
     fig.update_layout(
         title=title,
         xaxis_title=xaxis_title,
-        yaxis_title=yaxis_title)
+        yaxis_title=yaxis_title,
+        width=1200,
+        height=800
+    )
     return fig
 
 

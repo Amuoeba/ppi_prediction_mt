@@ -2,6 +2,8 @@
 import os
 import dash
 import dash_bootstrap_components as dbc
+from flask_caching import Cache
+
 # Project specific imports
 
 # Imports from internal libraries
@@ -13,8 +15,10 @@ from typing import TYPE_CHECKING
 
 
 app = dash.Dash()
-server = app.server
+
 app.config.suppress_callback_exceptions = True
+
+
 
 app.css.append_css({
     "external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"
