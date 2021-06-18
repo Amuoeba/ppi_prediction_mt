@@ -39,6 +39,8 @@ class SetupConfig:
     # Static values
     aminoacids_csv: pathlib.Path = os.path.abspath("data/aminoacids.csv")
 
+
+
     def __post_init__(self):
         self.data_caches = self.data_root.joinpath(self.data_caches)
         self.PDBind_data = self.data_root.joinpath(self.PDBind_data)
